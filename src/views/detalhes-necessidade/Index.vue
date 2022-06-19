@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Titulo from '@/components/Titulo.vue';
+import Titulo from '@/components/common/Titulo.vue';
 
 export default {
   name: 'DetalhesNecessidade',

@@ -1,16 +1,16 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import HomeView from '@/views/HomeView.vue';
-import DoarView from '@/views/DoarView.vue';
-import CadastrarNecessidadeView from '@/views/CadastrarNecessidadeView.vue';
-import DoacoesView from '@/views/DoacoesView.vue';
-import DetalhesDoacao from '@/views/DetalhesDoacao.vue';
-import NecessidadesView from '@/views/NecessidadesView.vue';
-import DetalhesNecessidade from '@/views/DetalhesNecessidade.vue';
-import ContatoView from '@/views/ContatoView.vue';
-import CriarContaView from '@/views/CriarContaView.vue';
-import LoginView from '@/views/LoginView.vue';
-import PerfilView from '@/views/PerfilView.vue';
+import HomeView from '@/views/home/Index.vue';
+import DoarView from '@/views/doar/Index.vue';
+import CadastrarNecessidadeView from '@/views/cadastrar-necessidade/Index.vue';
+import DoacoesView from '@/views/doacoes/Index.vue';
+import DetalhesDoacao from '@/views/detalhes-doacao/Index.vue';
+import NecessidadesView from '@/views/necessidades/Index.vue';
+import DetalhesNecessidade from '@/views/detalhes-necessidade/Index.vue';
+import ContatoView from '@/views/contato/Index.vue';
+import CriarContaView from '@/views/criar-conta/Index.vue';
+import LoginView from '@/views/login/Index.vue';
+import PerfilView from '@/views/perfil/Index.vue';
 
 Vue.use(VueRouter);
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="col bg-light rounded shadow-lg my-5">
+  <div class="container bg-light rounded shadow-lg mt-5 py-3">
     <form class="needs-validation" novalidate>
       <div class="row py-4 justify-content-center">
         <label for="validationTitulo" class="col-11 form-label">
@@ -88,6 +88,26 @@ export default {
       this.descricao = '';
       this.categoria = '';
     },
+    validacao() {
+      const forms = document.querySelectorAll('.needs-validation');
+      Array.from(forms).forEach((form) => {
+        form.addEventListener(
+          'submit',
+          (event) => {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+
+            form.classList.add('was-validated');
+          },
+          false,
+        );
+      });
+    },
+  },
+  mounted() {
+    this.validacao();
   },
 };
 </script>

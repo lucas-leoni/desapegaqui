@@ -3,7 +3,7 @@
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white px-5 py-4 shadow-lg">
       <div class="ps-5 logo">
         <router-link to="/">
-          <img src="../assets/logo.jpeg" alt="logo" width="50px" height="50px" />
+          <img src="../../assets/logo.jpeg" alt="logo" width="50px" height="50px" />
         </router-link>
       </div>
       <div class="col">

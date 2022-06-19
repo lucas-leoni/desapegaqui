@@ -10,14 +10,14 @@
           </p>
         </div>
         <div class="col-5">
-          <img src="../assets/image-1.svg" alt="image-1" width="100%" height="100%" />
+          <img src="../../assets/image-1.svg" alt="image-1" width="100%" height="100%" />
         </div>
       </div>
     </div>
     <div class="container-fluid pb-5 px-5">
       <div class="row px-5 pb-5 justify-content-around">
         <div class="col-5">
-          <img src="../assets/image-2.svg" alt="image-2" width="100%" height="100%" />
+          <img src="../../assets/image-2.svg" alt="image-2" width="100%" height="100%" />
         </div>
         <div class="col-5 d-flex flex-column justify-content-center">
           <h1>Vitrine Virtual de Doações e Necessidades</h1>

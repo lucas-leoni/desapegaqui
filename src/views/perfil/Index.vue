@@ -1,14 +1,14 @@
 <template>
   <div class="container py-5 px-0">
-    <Titulo titulo="Detalhes Doação" />
+    <Titulo titulo="Perfil" />
   </div>
 </template>
 
 <script>
-import Titulo from '@/components/Titulo.vue';
+import Titulo from '@/components/common/Titulo.vue';
 
 export default {
-  name: 'DetalhesDoacao',
+  name: 'PerfilView',
   components: {
     Titulo,
   },
