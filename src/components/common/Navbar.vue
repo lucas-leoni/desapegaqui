@@ -1,63 +1,157 @@
 <template>
-  <div>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white px-5 py-4 shadow-lg">
-      <div class="ps-5 logo">
-        <router-link to="/">
-          <img src="../../assets/logo.jpeg" alt="logo" width="50px" height="50px" />
-        </router-link>
-      </div>
-      <div class="col">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item px-3 d-flex align-items-center fs-5">
-              <router-link to="/" class="nav-link">O que é?</router-link>
-            </li>
-            <li class="nav-item px-3 d-flex align-items-center fs-5">
-              <router-link to="/" class="nav-link">Como funciona? </router-link>
-            </li>
-            <li class="nav-item px-3 d-flex align-items-center fs-5">
-              <router-link to="/doar" class="nav-link">Doar</router-link>
-            </li>
-            <li class="nav-item px-3 d-flex align-items-center fs-5">
-              <router-link to="/cadastrar-necessidade" class="nav-link">
-                Cadastrar necessidade
-              </router-link>
-            </li>
-            <li class="nav-item px-3 d-flex align-items-center fs-5">
-              <router-link to="/doacoes" class="nav-link">Consultar doações</router-link>
-            </li>
-            <li class="nav-item px-3 d-flex align-items-center fs-5">
-              <router-link to="/necessidades" class="nav-link">Consultar necessidade</router-link>
-            </li>
-            <li class="nav-item px-3 d-flex align-items-center fs-5">
-              <router-link to="/contato" class="nav-link">Contato</router-link>
-            </li>
-            <li class="nav-item px-3 d-flex align-items-center fs-5">
-              <router-link to="/criar-conta" class="nav-link criar-conta">
-                <button type="button" class="btn btn-outline-primary">Criar Conta</button>
-              </router-link>
-            </li>
-            <li class="nav-item px-3 d-flex align-items-center fs-5">
-              <router-link to="/login" class="nav-link login">
-                <button id="login" type="button" class="btn btn-primary">Login</button>
-              </router-link>
-            </li>
-          </ul>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white px-5 py-4
+    shadow-lg justify-content-center">
+    <div class="col-1 logo d-flex justify-content-start">
+      <router-link to="/">
+        <img src="../../assets/logo.jpeg" alt="logo" width="50px" height="50px" />
+      </router-link>
+    </div>
+    <div class="col-10">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul id="ul-principal" class="navbar-nav">
+          <li class="nav-item px-3 d-flex align-items-center fs-5">
+            <router-link to="/" class="nav-link">O que é?</router-link>
+          </li>
+          <li class="nav-item px-3 d-flex align-items-center fs-5">
+            <router-link to="/" class="nav-link">Como funciona? </router-link>
+          </li>
+          <li class="nav-item px-3 d-flex align-items-center fs-5">
+            <router-link to="/doar" class="nav-link">Doar</router-link>
+          </li>
+          <li class="nav-item px-3 d-flex align-items-center fs-5">
+            <router-link to="/cadastrar-necessidade" class="nav-link">
+              Cadastrar necessidade
+            </router-link>
+          </li>
+          <li class="nav-item px-3 d-flex align-items-center fs-5">
+            <router-link to="/doacoes" class="nav-link">Consultar doações</router-link>
+          </li>
+          <li class="nav-item px-3 d-flex align-items-center fs-5">
+            <router-link to="/necessidades" class="nav-link">Consultar necessidade</router-link>
+          </li>
+          <li class="nav-item px-3 d-flex align-items-center fs-5">
+            <router-link to="/criar-conta" class="nav-link criar-conta">
+              <button type="button" class="btn btn-outline-primary">Criar Conta</button>
+            </router-link>
+          </li>
+          <li class="nav-item px-3 d-flex align-items-center fs-5">
+            <router-link to="/login" class="nav-link login">
+              <button id="login" type="button" class="btn btn-primary">Login</button>
+            </router-link>
+          </li>
+        </ul>
+        <div id="quebrar" class="col">
+          <div class="row py-2">
+            <ul class="navbar-nav d-flex justify-content-center col">
+              <li class="nav-item px-3 d-flex align-items-center fs-5">
+                <router-link to="/">
+                  <img src="../../assets/logo.jpeg" alt="logo" width="50px" height="50px" />
+                </router-link>
+              </li>
+            </ul>
+          </div>
+          <div class="row">
+            <ul class="navbar-nav col justify-content-center">
+              <li class="nav-item px-3 d-flex align-items-center fs-5">
+                <router-link to="/" class="nav-link">O que é?</router-link>
+              </li>
+              <li class="nav-item px-3 d-flex align-items-center fs-5">
+                <router-link to="/" class="nav-link">Como funciona? </router-link>
+              </li>
+              <li class="nav-item px-4 d-flex align-items-center fs-5">
+                <router-link to="/doar" class="nav-link">Doar</router-link>
+              </li>
+              <li class="nav-item px-4 d-flex align-items-center fs-5">
+                <router-link to="/cadastrar-necessidade" class="nav-link">
+                  Cadastrar necessidade
+                </router-link>
+              </li>
+              <li class="nav-item px-3 d-flex align-items-center fs-5">
+                <router-link to="/doacoes" class="nav-link">Consultar doações</router-link>
+              </li>
+              <li class="nav-item px-3 d-flex align-items-center fs-5">
+                <router-link to="/necessidades" class="nav-link">Consultar necessidade</router-link>
+              </li>
+            </ul>
+          </div>
+          <div class="row">
+            <ul class="navbar-nav col justify-content-center">
+              <li class="nav-item px-5 d-flex align-items-center fs-5">
+                <router-link to="/criar-conta" class="nav-link criar-conta">
+                  <button type="button" class="btn btn-outline-primary">Criar Conta</button>
+                </router-link>
+              </li>
+              <li class="nav-item px-5 d-flex align-items-center fs-5">
+                <router-link to="/login" class="nav-link login">
+                  <button id="login" type="button" class="btn btn-primary">Login</button>
+                </router-link>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="quebrar-2" class="col">
+          <div class="row py-2">
+            <ul class="navbar-nav d-flex justify-content-center col">
+              <li class="nav-item px-3 d-flex align-items-center fs-5">
+                <router-link to="/">
+                  <img src="../../assets/logo.jpeg" alt="logo" width="50px" height="50px" />
+                </router-link>
+              </li>
+            </ul>
+          </div>
+          <div class="row">
+            <ul class="navbar-nav col justify-content-center">
+              <li class="nav-item px-3 d-flex align-items-center fs-5">
+                <router-link to="/" class="nav-link">O que é?</router-link>
+              </li>
+              <li class="nav-item px-3 d-flex align-items-center fs-5">
+                <router-link to="/" class="nav-link">Como funciona? </router-link>
+              </li>
+              <li class="nav-item px-4 d-flex align-items-center fs-5">
+                <router-link to="/doar" class="nav-link">Doar</router-link>
+              </li>
+              <li class="nav-item px-4 d-flex align-items-center fs-5">
+                <router-link to="/criar-conta" class="nav-link criar-conta">
+                  <button type="button" class="btn btn-outline-primary">Criar Conta</button>
+                </router-link>
+              </li>
+              <li class="nav-item px-4 d-flex align-items-center fs-5">
+                <router-link to="/login" class="nav-link login">
+                  <button id="login" type="button" class="btn btn-primary">Login</button>
+                </router-link>
+              </li>
+            </ul>
+          </div>
+          <div class="row">
+            <ul class="navbar-nav col justify-content-center">
+              <li class="nav-item px-4 d-flex align-items-center fs-5">
+                <router-link to="/cadastrar-necessidade" class="nav-link">
+                  Cadastrar necessidade
+                </router-link>
+              </li>
+              <li class="nav-item px-3 d-flex align-items-center fs-5">
+                <router-link to="/doacoes" class="nav-link">Consultar doações</router-link>
+              </li>
+              <li class="nav-item px-3 d-flex align-items-center fs-5">
+                <router-link to="/necessidades" class="nav-link">Consultar necessidade</router-link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -65,3 +159,101 @@ export default {
   name: 'NavbarApp',
 };
 </script>
+
+<style scoped>
+#quebrar {
+  display: none;
+}
+#quebrar-2 {
+  display: none;
+}
+@media (min-width: 1490px) and (max-width: 1765px) {
+  nav {
+    flex-direction: column;
+  }
+  .logo {
+    justify-content: center !important;
+  }
+  .col-10 {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  #navbarNav {
+    justify-content: center !important;
+    /* padding: 1rem 0rem 0rem 0rem; */
+  }
+}
+@media (min-width: 1244px) and (max-width: 1489px) {
+  .logo {
+    display: none !important;
+  }
+  .col-10 {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  #ul-principal {
+    display: none;
+  }
+  #quebrar {
+    display: block;
+  }
+}
+@media (min-width: 995px) and (max-width: 1243px) {
+  .logo {
+    display: none !important;
+  }
+  .col-10 {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  #ul-principal {
+    display: none;
+  }
+  #quebrar-2 {
+    display: block;
+  }
+}
+@media (min-width: 992px) and (max-width: 995px) {
+  .logo {
+    display: none !important;
+  }
+  .col-10 {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  #ul-principal {
+    display: none;
+  }
+  #quebrar-2 {
+    display: block;
+  }
+  nav {
+    padding: 1.5rem 0rem 1.5rem 0rem !important;
+  }
+}
+@media (max-width: 991px) {
+  .logo {
+    flex: 0 0 auto;
+    width: 16.66666667%;
+  }
+  .col-10 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  nav {
+    justify-content: space-between !important;
+    align-items: flex-start;
+  }
+  .navbar-nav {
+    position: absolute;
+    top: 100%;
+    right: 8%;
+    margin: 0px;
+    height: auto;
+    background: #ffffff;
+    border-bottom-left-radius: 2%;
+    border-bottom-right-radius: 2%;
+  }
+}
+</style>
