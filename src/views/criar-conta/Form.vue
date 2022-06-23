@@ -48,7 +48,7 @@
                 <input
                   type="password"
                   minlength="8"
-                  class="form-control mt-1"
+                  class="senha form-control mt-1"
                   id="validationSenha"
                   placeholder="Insira uma senha"
                   required
@@ -57,7 +57,8 @@
                 <div class="invalid-feedback">Senha obrigatória</div>
               </div>
               <div class="col-1 d-flex px-0 py-1">
-                <i class="bi bi-eye-fill fs-4"></i>
+                <i v-if="true" class="bi bi-eye-fill fs-4"></i>
+                <i v-else class="bi bi-eye-slash-fill fs-4"></i>
               </div>
             </label>
           </div>
@@ -70,7 +71,7 @@
                 <input
                   type="password"
                   minlength="8"
-                  class="form-control mt-1"
+                  class="confirmar-senha form-control mt-1"
                   id="validationConfirmarSenha"
                   placeholder="Confirme a senha"
                   required
@@ -79,7 +80,8 @@
                 <div class="invalid-feedback">Confirmação de senha obrigatória</div>
               </div>
               <div class="col-1 d-flex px-0 py-1">
-                <i class="bi bi-eye-slash-fill fs-4"></i>
+                <i v-if="true" class="bi bi-eye-fill fs-4"></i>
+                <i v-else class="bi bi-eye-slash-fill fs-4"></i>
               </div>
             </label>
           </div>
@@ -87,7 +89,11 @@
       </div>
       <div class="row py-4 justify-content-evenly">
         <div class="col-5">
-          <button class="btn btn-secondary" type="button">Fazer Login</button>
+          <button class="btn btn-secondary" type="button">
+            <router-link class="text-decoration-none text-white" to="/login">
+              Fazer Login
+            </router-link>
+          </button>
         </div>
         <div class="col-5 d-flex justify-content-end">
           <button class="btn btn-primary" type="submit">Criar Conta</button>
@@ -126,6 +132,10 @@ export default {
         );
       });
     },
+    /* mostrarSenha() {
+      const inputSenha = document.querySelectorAll('.senha')[0];
+      inputSenha.type = 'text';
+    }, */
   },
   mounted() {
     this.validacao();
