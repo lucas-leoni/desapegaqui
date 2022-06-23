@@ -7,7 +7,6 @@ import DoacoesView from '@/views/doacoes/Index.vue';
 import DetalhesDoacao from '@/views/detalhes-doacao/Index.vue';
 import NecessidadesView from '@/views/necessidades/Index.vue';
 import DetalhesNecessidade from '@/views/detalhes-necessidade/Index.vue';
-import ContatoView from '@/views/contato/Index.vue';
 import CriarContaView from '@/views/criar-conta/Index.vue';
 import LoginView from '@/views/login/Index.vue';
 import PerfilView from '@/views/perfil/Index.vue';
@@ -49,11 +48,6 @@ const routes = [
     path: '/necessidade/:id',
     name: 'DetalhesNecessidade',
     component: DetalhesNecessidade,
-  },
-  {
-    path: '/contato',
-    name: 'contato',
-    component: ContatoView,
   },
   {
     path: '/criar-conta',
