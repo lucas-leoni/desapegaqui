@@ -1,7 +1,6 @@
 <template>
-  <div id="app" class="bg-secondary">
-    <Navbar />
-    <div class="py-5 my-1"></div>
+  <div id="app">
+    <Navbar v-if="exibir()"/>
     <router-view />
   </div>
 </template>
@@ -14,8 +13,17 @@ export default {
   components: {
     Navbar,
   },
+  methods: {
+    exibir() {
+      if (this.$route.name === 'criarConta') {
+        return false;
+      } if (this.$route.name === 'login') {
+        return false;
+      } return true;
+    },
+  },
+  onMounted() {
+    this.exibir();
+  },
 };
-
-const { body } = document;
-body.style.backgroundColor = '#6c757d';
 </script>

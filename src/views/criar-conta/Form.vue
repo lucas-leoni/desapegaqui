@@ -1,8 +1,8 @@
 <template>
-  <div class="container col-8 bg-light rounded shadow-lg mt-5 py-3">
+  <div class="col">
     <form class="needs-validation" novalidate>
-      <div class="row py-4 justify-content-evenly">
-        <div class="col-5">
+      <div class="row py-1 justify-content-center">
+        <div class="col-7">
           <div class="row">
             <label for="validationNomeUsuario" class="form-label row">
               <span class="fs-5">Nome de usuário</span>
@@ -20,7 +20,9 @@
             </label>
           </div>
         </div>
-        <div class="col-5">
+      </div>
+      <div class="row py-1 justify-content-center">
+        <div class="col-7">
           <div class="row">
             <label for="validationEmail" class="form-label row">
               <span class="fs-5">Email</span>
@@ -39,8 +41,8 @@
           </div>
         </div>
       </div>
-      <div class="row py-4 justify-content-evenly">
-        <div class="col-5">
+      <div class="row py-1 justify-content-center">
+        <div class="col-7">
           <div class="row">
             <label for="validationSenha" class="form-label row">
               <span class="fs-5">Senha</span>
@@ -63,7 +65,9 @@
             </label>
           </div>
         </div>
-        <div class="col-5">
+      </div>
+      <div class="row py-1 justify-content-center">
+        <div class="col-7">
           <div class="row">
             <label for="validationConfirmarSenha" class="form-label row">
               <span class="fs-5">Confimar senha</span>
@@ -87,16 +91,20 @@
           </div>
         </div>
       </div>
-      <div class="row py-4 justify-content-evenly">
-        <div class="col-5">
-          <button class="btn btn-secondary" type="button">
-            <router-link class="text-decoration-none text-white" to="/login">
-              Fazer Login
-            </router-link>
-          </button>
-        </div>
-        <div class="col-5 d-flex justify-content-end">
-          <button class="btn btn-primary" type="submit">Criar Conta</button>
+      <div class="row py-1 justify-content-center">
+        <div class="col-6">
+          <div class="row">
+            <div class="col">
+              <button class="btn btn-secondary" type="button">
+                <router-link class="text-decoration-none text-white" to="/login">
+                  Fazer Login
+                </router-link>
+              </button>
+            </div>
+            <div class="col d-flex justify-content-end">
+              <button class="btn btn-primary" type="submit">Criar Conta</button>
+            </div>
+          </div>
         </div>
       </div>
     </form>
