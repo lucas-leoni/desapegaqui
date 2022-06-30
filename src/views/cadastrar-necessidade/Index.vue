@@ -1,18 +1,18 @@
 <template>
   <div class="container py-5 px-0">
     <Titulo titulo="Cadastre sua necessidade" />
-    <FormAnuncio :exibir="false" />
+    <Form />
   </div>
 </template>
 
 <script>
-import FormAnuncio from '@/components/FormAnuncio.vue';
+import Form from '@/views/cadastrar-necessidade/layout/Form.vue';
 import Titulo from '@/components/common/Titulo.vue';
 
 export default {
   name: 'CadastrarNecessidadeView',
   components: {
-    FormAnuncio,
+    Form,
     Titulo,
   },
 };

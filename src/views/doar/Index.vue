@@ -1,18 +1,18 @@
 <template>
   <div class="container py-5 px-0">
     <Titulo titulo="Cadastre sua doação" />
-    <FormAnuncio :exibir="true" />
+    <Form />
   </div>
 </template>
 
 <script>
-import FormAnuncio from '@/components/FormAnuncio.vue';
+import Form from '@/views/doar/layout/Form.vue';
 import Titulo from '@/components/common/Titulo.vue';
 
 export default {
   name: 'DoarView',
   components: {
-    FormAnuncio,
+    Form,
     Titulo,
   },
 };

@@ -1,5 +1,10 @@
 <template>
   <div class="col">
+    <div class="row py-1 justify-content-center">
+      <div class="col-6 d-flex justify-content-center">
+        <Titulo titulo="Login" />
+      </div>
+    </div>
     <form class="needs-validation" novalidate>
       <div class="row py-1 justify-content-center">
         <div class="col-6">
@@ -66,8 +71,13 @@
 </template>
 
 <script>
+import Titulo from '@/components/common/Titulo.vue';
+
 export default {
   name: 'FormLogin',
+  components: {
+    Titulo,
+  },
   data() {
     return {
       email: '',

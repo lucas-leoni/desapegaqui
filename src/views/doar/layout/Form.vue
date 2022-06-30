@@ -42,7 +42,7 @@
           <div class="invalid-feedback">Categoria obrigatória</div>
         </label>
       </div>
-      <div v-if="exibir" class="row justify-content-center">
+      <div class="row justify-content-center">
         <label for="validationCategoria" class="col-11 form-label">
           <div class="row justify-content-center">
             <div class="col-4 d-flex justify-content-center">
@@ -69,12 +69,6 @@
 <script>
 export default {
   name: 'FormAnuncio',
-  props: {
-    exibir: {
-      type: Boolean,
-      required: true,
-    },
-  },
   data() {
     return {
       titulo: '',
