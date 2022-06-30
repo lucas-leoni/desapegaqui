@@ -10,7 +10,7 @@
             id="validationTitulo"
             placeholder="Insira um título para o seu anúncio"
             required
-            v-model="titulo"
+            v-model="doacao.titulo"
           />
           <div class="invalid-feedback">Título obrigatório</div>
         </label>
@@ -24,7 +24,7 @@
             placeholder="Insira uma descrição para o seu anúncio"
             rows="4"
             required
-            v-model="descricao"
+            v-model="doacao.descricao"
           >
           </textarea>
           <div class="invalid-feedback">Descrição obrigatória</div>
@@ -33,7 +33,7 @@
       <div class="row py-4 justify-content-center">
         <label for="validationCategoria" class="col-11 form-label">
           <span class="fs-5">Categoria</span>
-          <select class="form-select" required aria-label="categoria" v-model="categoria">
+          <select class="form-select" required aria-label="categoria" v-model="doacao.categoria">
             <option value="">Selecione</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -71,16 +71,18 @@ export default {
   name: 'FormAnuncio',
   data() {
     return {
-      titulo: '',
-      descricao: '',
-      categoria: '',
+      doacao: {
+        titulo: '',
+        descricao: '',
+        categoria: '',
+      },
     };
   },
   methods: {
     cancelar() {
-      this.titulo = '';
-      this.descricao = '';
-      this.categoria = '';
+      this.doacao.titulo = '';
+      this.doacao.descricao = '';
+      this.doacao.categoria = '';
     },
     validacao() {
       const forms = document.querySelectorAll('.needs-validation');
