@@ -58,7 +58,7 @@
       </div>
       <div class="row py-4 justify-content-center">
         <div class="col-11 d-flex justify-content-between">
-          <button @click="cancelar" class="btn btn-secondary" type="button">Cancelar</button>
+          <button @click="limpar" class="btn btn-secondary" type="button">Cancelar</button>
           <button class="btn btn-primary" type="submit">Anunciar</button>
         </div>
       </div>
@@ -67,6 +67,8 @@
 </template>
 
 <script>
+import SUPABASE_AUTH from '@/services/index';
+
 export default {
   name: 'FormAnuncio',
   data() {
@@ -79,7 +81,31 @@ export default {
     };
   },
   methods: {
-    cancelar() {
+    criarDoacao() {
+      const doacao = {
+        title: this.doacao.titulo,
+        description: this.doacao.descricao,
+        category: this.doacao.categoria,
+      };
+      this.salvarDoacao(doacao);
+    },
+    async salvarDoacao(camposDoacao) {
+      const { data, error } = await SUPABASE_AUTH
+        .from('doacao')
+        .insert([camposDoacao]);
+      this.sucesso(data);
+      this.erro(error);
+    },
+    sucesso(data) {
+      console.log('Doação salva: ', data);
+      this.limpar();
+    },
+    erro(error) {
+      if (error) {
+        console.log('Erro: ', error);
+      }
+    },
+    limpar() {
       this.doacao.titulo = '';
       this.doacao.descricao = '';
       this.doacao.categoria = '';

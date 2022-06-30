@@ -72,23 +72,23 @@ export default {
     };
   },
   methods: {
-    criarDoacao() {
-      const doacao = {
-        title: this.doacao.titulo,
-        description: this.doacao.descricao,
-        category: this.doacao.categoria,
+    criarNecessidade() {
+      const necessidade = {
+        title: this.necessidade.titulo,
+        description: this.necessidade.descricao,
+        category: this.necessidade.categoria,
       };
-      this.salvarDoacao(doacao);
+      this.salvarNecessidade(necessidade);
     },
-    async salvarDoacao(camposDoacao) {
+    async salvarnecessidade(camposNecessidade) {
       const { data, error } = await SUPABASE_AUTH
-        .from('doacao')
-        .insert([camposDoacao]);
+        .from('necessidade')
+        .insert([camposNecessidade]);
       this.sucesso(data);
       this.erro(error);
     },
     sucesso(data) {
-      console.log('Doação salva: ', data);
+      console.log('Necessidade salva: ', data);
       this.limpar();
     },
     erro(error) {
