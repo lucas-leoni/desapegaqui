@@ -1,0 +1,104 @@
+<template>
+  <div class="col">
+    <form class="needs-validation" novalidate>
+      <div class="row py-1 justify-content-center">
+        <div class="col-6">
+          <div class="row justify-content-center">
+            <label for="validationEmail" class="form-label row">
+              <span class="fs-5">Email</span>
+              <div class="col-11">
+                <input
+                  type="email"
+                  class="form-control mt-1"
+                  id="validationEmail"
+                  placeholder="Exemplo@email.com"
+                  required
+                  v-model="email"
+                />
+                <div class="invalid-feedback">Email obrigatório</div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row py-1 justify-content-center">
+        <div class="col-6">
+          <div class="row justify-content-center">
+            <label for="validationSenha" class="form-label row">
+              <span class="fs-5">Senha</span>
+              <div class="col-10">
+                <input
+                  type="password"
+                  minlength="8"
+                  class="senha form-control mt-1"
+                  id="validationSenha"
+                  placeholder="Insira uma senha"
+                  required
+                  v-model="senha"
+                />
+                <div class="invalid-feedback">Senha obrigatória</div>
+              </div>
+              <div class="col-1 d-flex px-0 py-1">
+                <i v-if="true" class="bi bi-eye-fill fs-4"></i>
+                <i v-else class="bi bi-eye-slash-fill fs-4"></i>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row py-1 justify-content-center">
+        <div class="col-6 d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary">Fazer Login</button>
+        </div>
+      </div>
+      <div class="row py-1 justify-content-center">
+        <div class="col-6 d-flex justify-content-center">
+          <p>
+            Ainda não tem uma conta?
+            <router-link class="text-decoration-none" to="/criar-conta">
+              Criar uma conta
+            </router-link>
+          </p>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'FormLogin',
+  data() {
+    return {
+      email: '',
+      senha: '',
+    };
+  },
+  methods: {
+    validacao() {
+      const forms = document.querySelectorAll('.needs-validation');
+      Array.from(forms).forEach((form) => {
+        form.addEventListener(
+          'submit',
+          (event) => {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+
+            form.classList.add('was-validated');
+          },
+          false,
+        );
+      });
+    },
+    /* mostrarSenha() {
+      const inputSenha = document.querySelectorAll('.senha')[0];
+      inputSenha.type = 'text';
+    }, */
+  },
+  mounted() {
+    this.validacao();
+  },
+};
+</script>

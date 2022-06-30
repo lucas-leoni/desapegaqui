@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white px-5 py-4
+  <nav class="navbar navbar-expand-lg navbar-light bg-white px-5 py-4
     shadow-lg justify-content-center">
     <div class="col-1 logo d-flex justify-content-start">
       <router-link to="/">

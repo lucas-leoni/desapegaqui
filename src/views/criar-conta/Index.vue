@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Imagem from '@/views/criar-conta/Imagem.vue';
-import Form from '@/views/criar-conta/Form.vue';
+import Imagem from '@/views/criar-conta/layout/Imagem.vue';
+import Form from '@/views/criar-conta/layout/Form.vue';
 
 export default {
   name: 'CriarContaView',

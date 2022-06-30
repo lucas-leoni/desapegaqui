@@ -1,18 +1,18 @@
 <template>
-  <div class="container py-5 px-0">
-    <Titulo titulo="Login" />
+  <div class="container-fluid row align-items-center p-0">
+    <Imagem />
     <Form />
   </div>
 </template>
 
 <script>
-import Titulo from '@/components/common/Titulo.vue';
-import Form from '@/views/login/Form.vue';
+import Imagem from '@/views/login/layout/Imagem.vue';
+import Form from '@/views/login/layout/Form.vue';
 
 export default {
   name: 'LoginView',
   components: {
-    Titulo,
+    Imagem,
     Form,
   },
 };
