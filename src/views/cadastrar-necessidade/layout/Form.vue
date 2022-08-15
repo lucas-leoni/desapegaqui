@@ -58,7 +58,6 @@
 </template>
 
 <script>
-import SUPABASE_AUTH from '@/services/index';
 
 export default {
   name: 'FormAnuncio',
@@ -72,30 +71,6 @@ export default {
     };
   },
   methods: {
-    criarNecessidade() {
-      const necessidade = {
-        title: this.necessidade.titulo,
-        description: this.necessidade.descricao,
-        category: this.necessidade.categoria,
-      };
-      this.salvarNecessidade(necessidade);
-    },
-    async salvarnecessidade(camposNecessidade) {
-      const { data, error } = await SUPABASE_AUTH
-        .from('necessidade')
-        .insert([camposNecessidade]);
-      this.sucesso(data);
-      this.erro(error);
-    },
-    sucesso(data) {
-      console.log('Necessidade salva: ', data);
-      this.limpar();
-    },
-    erro(error) {
-      if (error) {
-        console.log('Erro: ', error);
-      }
-    },
     limpar() {
       this.necessidade.titulo = '';
       this.necessidade.descricao = '';

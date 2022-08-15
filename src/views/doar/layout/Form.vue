@@ -67,7 +67,6 @@
 </template>
 
 <script>
-import SUPABASE_AUTH from '@/services/index';
 
 export default {
   name: 'FormAnuncio',
@@ -81,30 +80,6 @@ export default {
     };
   },
   methods: {
-    criarDoacao() {
-      const doacao = {
-        title: this.doacao.titulo,
-        description: this.doacao.descricao,
-        category: this.doacao.categoria,
-      };
-      this.salvarDoacao(doacao);
-    },
-    async salvarDoacao(camposDoacao) {
-      const { data, error } = await SUPABASE_AUTH
-        .from('doacao')
-        .insert([camposDoacao]);
-      this.sucesso(data);
-      this.erro(error);
-    },
-    sucesso(data) {
-      console.log('Doação salva: ', data);
-      this.limpar();
-    },
-    erro(error) {
-      if (error) {
-        console.log('Erro: ', error);
-      }
-    },
     limpar() {
       this.doacao.titulo = '';
       this.doacao.descricao = '';

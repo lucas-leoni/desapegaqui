@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar v-if="exibir()"/>
+    <Navbar v-if="exibir()" />
     <router-view />
   </div>
 </template>
@@ -15,11 +15,9 @@ export default {
   },
   methods: {
     exibir() {
-      if (this.$route.name === 'criarConta') {
-        return false;
-      } if (this.$route.name === 'login') {
-        return false;
-      } return true;
+      if (this.$route.name !== 'criarConta' && this.$route.name !== 'login') {
+        return true;
+      } return false;
     },
   },
   onMounted() {
