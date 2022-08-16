@@ -1,16 +1,16 @@
 <template>
-  <div class="container py-5 px-0">
-    <Titulo titulo="Detalhes Doação" />
+  <div class="container mt-5 py-5 px-0">
+    <AnuncioDetalhado />
   </div>
 </template>
 
 <script>
-import Titulo from '@/components/common/Titulo.vue';
+import AnuncioDetalhado from '@/components/AnuncioDetalhado.vue';
 
 export default {
   name: 'DetalhesDoacao',
   components: {
-    Titulo,
+    AnuncioDetalhado,
   },
 };
 </script>

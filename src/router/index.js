@@ -10,6 +10,8 @@ import DetalhesNecessidade from '@/views/detalhes-necessidade/Index.vue';
 import CriarContaView from '@/views/criar-conta/Index.vue';
 import LoginView from '@/views/login/Index.vue';
 import PerfilView from '@/views/perfil/Index.vue';
+import MinhasDoacoesView from '@/views/minhas-doacoes/Index.vue';
+import MinhasNecessidadesView from '@/views/minhas-necessidades/Index.vue';
 
 Vue.use(VueRouter);
 
@@ -63,6 +65,16 @@ const routes = [
     path: '/perfil',
     name: 'perfil',
     component: PerfilView,
+  },
+  {
+    path: '/minhas-doacoes',
+    name: 'minhasDoacoes',
+    component: MinhasDoacoesView,
+  },
+  {
+    path: '/minhas-necessidades',
+    name: 'minhasNecessidades',
+    component: MinhasNecessidadesView,
   },
 ];
 
