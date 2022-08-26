@@ -3,7 +3,7 @@
     <div class="container-fluid p-5">
       <div class="row p-5 justify-content-around">
         <div class="col-5 d-flex flex-column justify-content-center">
-          <h1>Plataforma Digital de Doações</h1>
+          <h1>Marketplace de Doações</h1>
           <p class="fs-3 pt-5">
             Desapegaqui é uma plataforma que realiza a intermediação da comunicação entre pessoas
             que possuem itens para doar com pessoas ou entidades que buscam contribuições.

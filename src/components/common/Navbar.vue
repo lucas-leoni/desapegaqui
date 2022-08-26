@@ -38,7 +38,7 @@
             <router-link to="/doacoes" class="nav-link">Consultar doações</router-link>
           </li>
           <li class="nav-item px-3 d-flex align-items-center fs-5">
-            <router-link to="/necessidades" class="nav-link">Consultar necessidade</router-link>
+            <router-link to="/necessidades" class="nav-link">Consultar necessidades</router-link>
           </li>
           <li class="nav-item px-3 d-flex align-items-center fs-5">
             <router-link to="/criar-conta" class="nav-link criar-conta">
