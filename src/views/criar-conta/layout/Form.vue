@@ -18,7 +18,7 @@
                   id="validationNomeUsuario"
                   placeholder="Insira um nome de usuário"
                   required
-                  v-model="nome_usuario"
+                  v-model="username"
                 />
                 <div class="invalid-feedback">Nome de usuário obrigatório</div>
               </div>
@@ -59,7 +59,7 @@
                   id="validationSenha"
                   placeholder="Insira uma senha"
                   required
-                  v-model="senha"
+                  v-model="password"
                 />
                 <div class="invalid-feedback">Senha obrigatória</div>
               </div>
@@ -80,11 +80,12 @@
                 <input
                   type="password"
                   minlength="8"
+                  maxlength="16"
                   class="confirmar-senha form-control mt-1"
                   id="validationConfirmarSenha"
                   placeholder="Confirme a senha"
                   required
-                  v-model="confirmar_senha"
+                  v-model="password_confirm"
                 />
                 <div class="invalid-feedback">Confirmação de senha obrigatória</div>
               </div>
@@ -125,10 +126,10 @@ export default {
   },
   data() {
     return {
-      nome_usuario: '',
+      username: '',
       email: '',
-      senha: '',
-      confirmar_senha: '',
+      password: '',
+      password_confirm: '',
     };
   },
   methods: {
