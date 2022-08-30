@@ -5,7 +5,7 @@
         <Titulo titulo="Criar conta" />
       </div>
     </div>
-    <form class="needs-validation" novalidate>
+    <form action="/perfil" class="needs-validation" novalidate>
       <div class="row py-1 justify-content-center">
         <div class="col-6">
           <div class="row justify-content-center">
@@ -18,6 +18,7 @@
                   id="validationNomeUsuario"
                   placeholder="Insira um nome de usuário"
                   required
+                  minlength="3"
                   v-model="username"
                 />
                 <div class="invalid-feedback">Nome de usuário obrigatório</div>
@@ -38,6 +39,7 @@
                   id="validationEmail"
                   placeholder="Exemplo@email.com"
                   required
+                  minlength="6"
                   v-model="email"
                 />
                 <div class="invalid-feedback">Email obrigatório</div>
@@ -53,19 +55,22 @@
               <span class="fs-5">Senha</span>
               <div class="col-10">
                 <input
-                  type="password"
+                  :type="inputType"
                   minlength="8"
+                  maxlength="16"
                   class="senha form-control mt-1"
-                  id="validationSenha"
+                  id="validationPassword"
                   placeholder="Insira uma senha"
                   required
                   v-model="password"
                 />
-                <div class="invalid-feedback">Senha obrigatória</div>
+                <div id="feedback-password" class="invalid-feedback">Senha obrigatória</div>
               </div>
-              <div class="col-1 d-flex px-0 py-1">
-                <i v-if="true" class="bi bi-eye-fill fs-4"></i>
-                <i v-else class="bi bi-eye-slash-fill fs-4"></i>
+              <div class="col-1 d-flex align-items-start px-0 py-1">
+                <button @click="togglePassword" type="button" class="btn btn-default p-0">
+                  <i v-if="isPassword" class="bi bi-eye-fill fs-4"></i>
+                  <i v-else class="bi bi-eye-slash-fill fs-4"></i>
+                </button>
               </div>
             </label>
           </div>
@@ -78,20 +83,24 @@
               <span class="fs-5">Confimar senha</span>
               <div class="col-10">
                 <input
-                  type="password"
+                  :type="inputType"
                   minlength="8"
                   maxlength="16"
                   class="confirmar-senha form-control mt-1"
-                  id="validationConfirmarSenha"
+                  id="validationPasswordConfirm"
                   placeholder="Confirme a senha"
                   required
                   v-model="password_confirm"
                 />
-                <div class="invalid-feedback">Confirmação de senha obrigatória</div>
+                <div id="feedback-password-confirm" class="invalid-feedback">
+                  Confirmação de senha obrigatória
+                </div>
               </div>
-              <div class="col-1 d-flex px-0 py-1">
-                <i v-if="true" class="bi bi-eye-fill fs-4"></i>
-                <i v-else class="bi bi-eye-slash-fill fs-4"></i>
+              <div class="col-1 d-flex align-items-start px-0 py-1">
+                <button @click="togglePassword" type="button" class="btn btn-default p-0">
+                  <i v-if="isPassword" class="bi bi-eye-fill fs-4"></i>
+                  <i v-else class="bi bi-eye-slash-fill fs-4"></i>
+                </button>
               </div>
             </label>
           </div>
@@ -99,16 +108,14 @@
       </div>
       <div class="row py-1 justify-content-center">
         <div class="col-6 d-flex justify-content-center">
-          <button type="submit" class="btn btn-primary">Criar Conta</button>
+          <button @click="save" type="submit" class="btn btn-primary">Criar Conta</button>
         </div>
       </div>
       <div class="row py-1 justify-content-center">
         <div class="col-6 d-flex justify-content-center">
           <p>
             Já possui uma conta?
-            <router-link class="text-decoration-none" to="/login">
-              Fazer login
-            </router-link>
+            <router-link class="text-decoration-none" to="/login"> Fazer login </router-link>
           </p>
         </div>
       </div>
@@ -118,6 +125,7 @@
 
 <script>
 import Titulo from '@/components/common/Titulo.vue';
+import axios from 'axios';
 
 export default {
   name: 'FormCriarConta',
@@ -130,10 +138,16 @@ export default {
       email: '',
       password: '',
       password_confirm: '',
+      inputType: 'password',
     };
   },
+  computed: {
+    isPassword() {
+      return this.inputType === 'password';
+    },
+  },
   methods: {
-    validacao() {
+    validation() {
       const forms = document.querySelectorAll('.needs-validation');
       Array.from(forms).forEach((form) => {
         form.addEventListener(
@@ -150,13 +164,83 @@ export default {
         );
       });
     },
-    /* mostrarSenha() {
-      const inputSenha = document.querySelectorAll('.senha')[0];
-      inputSenha.type = 'text';
-    }, */
+    togglePassword() {
+      if (this.isPassword) {
+        this.inputType = 'text';
+      } else {
+        this.inputType = 'password';
+      }
+    },
+    notNull() {
+      if (
+        this.username !== ''
+        && this.email !== ''
+        && this.password !== ''
+        && this.password_confirm !== ''
+      ) {
+        return true;
+      }
+      return false;
+    },
+    lengthValidation() {
+      if (
+        this.username.length >= 3
+        && this.email.length >= 6
+        && this.password.length >= 8
+        && this.password.length <= 16
+        && this.password_confirm.length >= 8
+        && this.password_confirm.length <= 16
+      ) {
+        return true;
+      }
+      return false;
+    },
+    validationPassword() {
+      const password = document.getElementById('validationPassword');
+      const passwordConfirm = document.getElementById('validationPasswordConfirm');
+      if (password.value !== passwordConfirm.value) {
+        const feedback = document.getElementById('feedback-password');
+        const feedback2 = document.getElementById('feedback-password-confirm');
+        feedback.textContent = 'Senhas diferentes!';
+        feedback.style.display = 'block';
+        feedback2.textContent = 'Senhas diferentes!';
+        feedback2.style.display = 'block';
+        // eslint-disable-next-line no-alert
+        alert('Senhas diferentes!');
+        return false;
+      }
+      if (password.value === passwordConfirm.value) {
+        const feedback = document.getElementById('feedback-password-confirm');
+        feedback.textContent = 'Confirmação de senha obrigatória!';
+        feedback.style.display = 'none';
+        return true;
+      }
+      return '';
+    },
+    save() {
+      const data = {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+      };
+      if (
+        this.notNull() === true
+        && this.lengthValidation() === true
+        && this.validationPassword() === true
+      ) {
+        axios
+          .post('http://localhost:5000/api/cadastro', data)
+          .then(() => {
+            console.log('User successfully registered');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
   },
   mounted() {
-    this.validacao();
+    this.validation();
   },
 };
 </script>
