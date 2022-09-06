@@ -5,7 +5,7 @@
         <Titulo titulo="Login" />
       </div>
     </div>
-    <form class="needs-validation" novalidate>
+    <form action="/perfil" class="needs-validation" novalidate>
       <div class="row py-1 justify-content-center">
         <div class="col-6">
           <div class="row justify-content-center">
@@ -18,6 +18,7 @@
                   id="validationEmail"
                   placeholder="Exemplo@email.com"
                   required
+                  minlength="6"
                   v-model="email"
                 />
                 <div class="invalid-feedback">Email obrigatório</div>
@@ -33,19 +34,22 @@
               <span class="fs-5">Senha</span>
               <div class="col-10">
                 <input
-                  type="password"
+                  :type="inputType"
                   minlength="8"
+                  maxlength="16"
                   class="senha form-control mt-1"
                   id="validationSenha"
-                  placeholder="Insira uma senha"
+                  placeholder="Insira a senha"
                   required
-                  v-model="senha"
+                  v-model="password"
                 />
                 <div class="invalid-feedback">Senha obrigatória</div>
               </div>
-              <div class="col-1 d-flex px-0 py-1">
-                <i v-if="true" class="bi bi-eye-fill fs-4"></i>
-                <i v-else class="bi bi-eye-slash-fill fs-4"></i>
+              <div class="col-1 d-flex align-items-start px-0 py-1">
+                <button @click="togglePassword" type="button" class="btn btn-default p-0">
+                  <i v-if="isPassword" class="bi bi-eye-fill fs-4"></i>
+                  <i v-else class="bi bi-eye-slash-fill fs-4"></i>
+                </button>
               </div>
             </label>
           </div>
@@ -53,7 +57,7 @@
       </div>
       <div class="row py-1 justify-content-center">
         <div class="col-6 d-flex justify-content-center">
-          <button type="submit" class="btn btn-primary">Fazer Login</button>
+          <button @click="signIn" type="submit" class="btn btn-primary">Fazer Login</button>
         </div>
       </div>
       <div class="row py-1 justify-content-center">
@@ -72,6 +76,7 @@
 
 <script>
 import Titulo from '@/components/common/Titulo.vue';
+import api from '@/api';
 
 export default {
   name: 'FormLogin',
@@ -81,11 +86,17 @@ export default {
   data() {
     return {
       email: '',
-      senha: '',
+      password: '',
+      inputType: 'password',
     };
   },
+  computed: {
+    isPassword() {
+      return this.inputType === 'password';
+    },
+  },
   methods: {
-    validacao() {
+    validation() {
       const forms = document.querySelectorAll('.needs-validation');
       Array.from(forms).forEach((form) => {
         form.addEventListener(
@@ -102,13 +113,42 @@ export default {
         );
       });
     },
-    /* mostrarSenha() {
-      const inputSenha = document.querySelectorAll('.senha')[0];
-      inputSenha.type = 'text';
-    }, */
+    togglePassword() {
+      if (this.isPassword) {
+        this.inputType = 'text';
+      } else {
+        this.inputType = 'password';
+      }
+    },
+    notNull() {
+      if (this.email !== '' && this.password !== '') {
+        return true;
+      }
+      return false;
+    },
+    lengthValidation() {
+      if (this.email.length >= 6 && this.password.length >= 8 && this.password.length <= 16) {
+        return true;
+      }
+      return false;
+    },
+    signIn() {
+      const data = {
+        email: this.email,
+        password: this.password,
+      };
+      if (this.notNull() === true && this.lengthValidation() === true) {
+        api
+          .post('/login', data)
+          .then(() => {})
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
   },
   mounted() {
-    this.validacao();
+    this.validation();
   },
 };
 </script>

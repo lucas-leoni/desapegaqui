@@ -125,7 +125,7 @@
 
 <script>
 import Titulo from '@/components/common/Titulo.vue';
-import axios from 'axios';
+import api from '@/api';
 
 export default {
   name: 'FormCriarConta',
@@ -147,6 +147,28 @@ export default {
     },
   },
   methods: {
+    save() {
+      const data = {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+      };
+      if (
+        this.notNull() === true
+        && this.lengthValidation() === true
+        && this.validationPassword() === true
+      ) {
+        api
+          .post('/user', data)
+          .then(() => {
+            console.log('User successfully registered');
+            /* this.$routes.push({ path: '/perfil' }); */
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
     validation() {
       const forms = document.querySelectorAll('.needs-validation');
       Array.from(forms).forEach((form) => {
@@ -216,27 +238,6 @@ export default {
         return true;
       }
       return '';
-    },
-    save() {
-      const data = {
-        username: this.username,
-        email: this.email,
-        password: this.password,
-      };
-      if (
-        this.notNull() === true
-        && this.lengthValidation() === true
-        && this.validationPassword() === true
-      ) {
-        axios
-          .post('http://localhost:5000/api/cadastro', data)
-          .then(() => {
-            console.log('User successfully registered');
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
     },
   },
   mounted() {
