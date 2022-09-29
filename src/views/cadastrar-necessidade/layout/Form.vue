@@ -10,6 +10,7 @@
             id="validationTitulo"
             placeholder="Insira um título para o seu anúncio"
             required
+            minlength="3"
             v-model="necessidade.titulo"
           />
           <div class="invalid-feedback">Título obrigatório</div>
@@ -24,6 +25,7 @@
             placeholder="Insira uma descrição para o seu anúncio"
             rows="4"
             required
+            minlength="10"
             v-model="necessidade.descricao"
           >
           </textarea>
@@ -50,7 +52,7 @@
       <div class="row py-4 justify-content-center">
         <div class="col-11 d-flex justify-content-between">
           <button @click="limpar" class="btn btn-secondary" type="button">Cancelar</button>
-          <button class="btn btn-primary" type="submit">Anunciar</button>
+          <button @click="save" class="btn btn-primary" type="submit">Anunciar</button>
         </div>
       </div>
     </form>
@@ -58,6 +60,7 @@
 </template>
 
 <script>
+import api from '@/api';
 
 export default {
   name: 'FormAnuncio',
@@ -67,10 +70,31 @@ export default {
         titulo: '',
         descricao: '',
         categoria: '',
+        type: 'necessity',
+        user: '6335de74c2b79def9b3ce1da',
       },
     };
   },
   methods: {
+    save() {
+      const data = {
+        title: this.necessidade.titulo,
+        description: this.necessidade.descricao,
+        category: this.necessidade.categoria,
+        type: this.necessidade.type,
+        user: this.necessidade.user,
+      };
+      if (this.notNull() === true && this.lengthValidation() === true) {
+        api
+          .post('/announcement', data)
+          .then(() => {
+            console.log('Announcement successfully saved');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
     limpar() {
       this.necessidade.titulo = '';
       this.necessidade.descricao = '';
@@ -92,6 +116,22 @@ export default {
           false,
         );
       });
+    },
+    notNull() {
+      if (
+        this.necessidade.titulo !== ''
+        && this.necessidade.descricao !== ''
+        && this.necessidade.categoria !== ''
+      ) {
+        return true;
+      }
+      return false;
+    },
+    lengthValidation() {
+      if (this.necessidade.titulo.length >= 3 && this.necessidade.descricao.length >= 10) {
+        return true;
+      }
+      return false;
     },
   },
   mounted() {
