@@ -37,7 +37,7 @@ export default {
   methods: {
     getAnnouncements() {
       api
-        .get('/announcements')
+        .get('/donation-announcements')
         .then((response) => {
           console.log('Anúncios: ', response.data);
           this.announcements = response.data;
