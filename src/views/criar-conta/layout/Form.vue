@@ -5,7 +5,7 @@
         <Titulo titulo="Criar conta" />
       </div>
     </div>
-    <form action="/perfil" class="needs-validation" novalidate>
+    <form @submit.prevent="checkForm" class="needs-validation" novalidate>
       <div class="row py-1 justify-content-center">
         <div class="col-6">
           <div class="row justify-content-center">
@@ -108,7 +108,9 @@
       </div>
       <div class="row py-1 justify-content-center">
         <div class="col-6 d-flex justify-content-center">
-          <button @click="save" type="submit" class="btn btn-primary">Criar Conta</button>
+          <button :disabled="isDisableButton" type="submit" class="btn btn-primary">
+            Criar Conta
+          </button>
         </div>
       </div>
       <div class="row py-1 justify-content-center">
@@ -120,6 +122,27 @@
         </div>
       </div>
     </form>
+    <div
+      v-if="showErrorMessage"
+      class="alert alert-danger alert-dismissible fade show"
+      role="alert"
+    >
+      {{ mensageError }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div
+      v-if="showErrorMessage"
+      class="toast"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="toast-header">
+        <strong class="me-auto">Error</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">{{ mensageError }}</div>
+    </div>
   </div>
 </template>
 
@@ -139,35 +162,50 @@ export default {
       password: '',
       password_confirm: '',
       inputType: 'password',
+      mensageError: '',
+      showErrorMessage: false,
     };
   },
   computed: {
     isPassword() {
       return this.inputType === 'password';
     },
+    isEmptyName() {
+      return !this.username;
+    },
+    isEmptyEmail() {
+      return !this.email;
+    },
+    isDisableButton() {
+      return this.isEmptyName === this.isEmptyEmail;
+    },
   },
   methods: {
+    checkForm() {
+      if (this.password !== this.password_confirm) {
+        console.log('Erro');
+        this.showErrorMessage = true;
+        this.mensageError = 'Password inválido';
+        return;
+      }
+      this.save();
+      console.log('checkForm');
+    },
     save() {
       const data = {
         username: this.username,
         email: this.email,
         password: this.password,
       };
-      if (
-        this.notNull() === true
-        && this.lengthValidation() === true
-        && this.validationPassword() === true
-      ) {
-        api
-          .post('/user', data)
-          .then(() => {
-            console.log('User successfully registered');
-            /* this.$routes.push({ path: '/perfil' }); */
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
+      api
+        .post('/user', data)
+        .then(() => {
+          console.log('User successfully registered');
+          this.$router.push({ path: '/perfil' });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     validation() {
       const forms = document.querySelectorAll('.needs-validation');
@@ -192,52 +230,6 @@ export default {
       } else {
         this.inputType = 'password';
       }
-    },
-    notNull() {
-      if (
-        this.username !== ''
-        && this.email !== ''
-        && this.password !== ''
-        && this.password_confirm !== ''
-      ) {
-        return true;
-      }
-      return false;
-    },
-    lengthValidation() {
-      if (
-        this.username.length >= 3
-        && this.email.length >= 6
-        && this.password.length >= 8
-        && this.password.length <= 16
-        && this.password_confirm.length >= 8
-        && this.password_confirm.length <= 16
-      ) {
-        return true;
-      }
-      return false;
-    },
-    validationPassword() {
-      const password = document.getElementById('validationPassword');
-      const passwordConfirm = document.getElementById('validationPasswordConfirm');
-      if (password.value !== passwordConfirm.value) {
-        const feedback = document.getElementById('feedback-password');
-        const feedback2 = document.getElementById('feedback-password-confirm');
-        feedback.textContent = 'Senhas diferentes!';
-        feedback.style.display = 'block';
-        feedback2.textContent = 'Senhas diferentes!';
-        feedback2.style.display = 'block';
-        // eslint-disable-next-line no-alert
-        alert('Senhas diferentes!');
-        return false;
-      }
-      if (password.value === passwordConfirm.value) {
-        const feedback = document.getElementById('feedback-password-confirm');
-        feedback.textContent = 'Confirmação de senha obrigatória!';
-        feedback.style.display = 'none';
-        return true;
-      }
-      return '';
     },
   },
   mounted() {
