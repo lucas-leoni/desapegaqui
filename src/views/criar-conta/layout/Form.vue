@@ -39,7 +39,7 @@
                 <input
                   type="email"
                   class="form-control mt-1"
-                  id="emal"
+                  id="email"
                   placeholder="Exemplo@email.com"
                   required
                   v-model="$v.email.$model"

@@ -5,23 +5,23 @@
         <Titulo titulo="Login" />
       </div>
     </div>
-    <form action="/perfil" class="needs-validation" novalidate>
+    <form @submit.prevent="signIn()">
       <div class="row py-1 justify-content-center">
         <div class="col-6">
           <div class="row justify-content-center">
-            <label for="validationEmail" class="form-label row">
+            <label for="email" class="form-label row">
               <span class="fs-5">Email</span>
               <div class="col-11">
                 <input
                   type="email"
                   class="form-control mt-1"
-                  id="validationEmail"
+                  id="email"
                   placeholder="Exemplo@email.com"
                   required
-                  minlength="6"
-                  v-model="email"
+                  v-model="$v.email.$model"
+                  :class="{ error: $v.email.$error, success: !$v.email.$error }"
                 />
-                <div class="invalid-feedback">Email obrigatório</div>
+                <div v-if="$v.email.$error" class="text-danger">Este email é inválido</div>
               </div>
             </label>
           </div>
@@ -30,7 +30,7 @@
       <div class="row py-1 justify-content-center">
         <div class="col-6">
           <div class="row justify-content-center">
-            <label for="validationSenha" class="form-label row">
+            <label for="password" class="form-label row">
               <span class="fs-5">Senha</span>
               <div class="col-10">
                 <input
@@ -38,12 +38,15 @@
                   minlength="8"
                   maxlength="16"
                   class="senha form-control mt-1"
-                  id="validationSenha"
+                  id="password"
                   placeholder="Insira a senha"
                   required
-                  v-model="password"
+                  v-model="$v.password.$model"
+                  :class="{ error: $v.password.$error, success: !$v.password.$error }"
                 />
-                <div class="invalid-feedback">Senha obrigatória</div>
+                <div v-if="$v.password.$error" class="text-danger">
+                  Deve conter de 8 a 16 caracteres
+                </div>
               </div>
               <div class="col-1 d-flex align-items-start px-0 py-1">
                 <button @click="togglePassword" type="button" class="btn btn-default p-0">
@@ -57,7 +60,9 @@
       </div>
       <div class="row py-1 justify-content-center">
         <div class="col-6 d-flex justify-content-center">
-          <button @click="signIn" type="submit" class="btn btn-primary">Fazer Login</button>
+          <button :disabled="$v.$invalid" type="submit" class="btn btn-primary">
+            Fazer Login
+          </button>
         </div>
       </div>
       <div class="row py-1 justify-content-center">
@@ -77,6 +82,12 @@
 <script>
 import Titulo from '@/components/common/Titulo.vue';
 import api from '@/api';
+import {
+  required,
+  minLength,
+  maxLength,
+  email,
+} from 'vuelidate/lib/validators';
 
 export default {
   name: 'FormLogin',
@@ -90,28 +101,37 @@ export default {
       inputType: 'password',
     };
   },
+  validations: {
+    email: {
+      required,
+      email,
+    },
+    password: {
+      required,
+      minLength: minLength(8),
+      maxLength: maxLength(16),
+    },
+  },
   computed: {
     isPassword() {
       return this.inputType === 'password';
     },
   },
   methods: {
-    validation() {
-      const forms = document.querySelectorAll('.needs-validation');
-      Array.from(forms).forEach((form) => {
-        form.addEventListener(
-          'submit',
-          (event) => {
-            if (!form.checkValidity()) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-
-            form.classList.add('was-validated');
-          },
-          false,
-        );
-      });
+    signIn() {
+      const data = {
+        email: this.email,
+        password: this.password,
+      };
+      api
+        .post('/login', data)
+        .then(() => {
+          console.log('User successfully logged');
+          this.$router.push({ path: '/perfil' });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     togglePassword() {
       if (this.isPassword) {
@@ -120,35 +140,12 @@ export default {
         this.inputType = 'password';
       }
     },
-    notNull() {
-      if (this.email !== '' && this.password !== '') {
-        return true;
-      }
-      return false;
-    },
-    lengthValidation() {
-      if (this.email.length >= 6 && this.password.length >= 8 && this.password.length <= 16) {
-        return true;
-      }
-      return false;
-    },
-    signIn() {
-      const data = {
-        email: this.email,
-        password: this.password,
-      };
-      if (this.notNull() === true && this.lengthValidation() === true) {
-        api
-          .post('/login', data)
-          .then(() => {})
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    },
-  },
-  mounted() {
-    this.validation();
   },
 };
 </script>
+
+<style scoped>
+.error {
+  border: 1px solid red;
+}
+</style>
