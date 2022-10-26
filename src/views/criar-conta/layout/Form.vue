@@ -5,23 +5,26 @@
         <Titulo titulo="Criar conta" />
       </div>
     </div>
-    <form @submit.prevent="checkForm" class="needs-validation" novalidate>
+    <form @submit.prevent="save()">
       <div class="row py-1 justify-content-center">
         <div class="col-6">
           <div class="row justify-content-center">
-            <label for="validationNomeUsuario" class="form-label row">
+            <label for="username" class="form-label row">
               <span class="fs-5">Nome de usuário</span>
               <div class="col-11">
                 <input
                   type="text"
                   class="form-control mt-1"
-                  id="validationNomeUsuario"
+                  id="username"
                   placeholder="Insira um nome de usuário"
                   required
                   minlength="3"
-                  v-model="username"
+                  v-model="$v.username.$model"
+                  :class="{ error: $v.username.$error, success: !$v.username.$error }"
                 />
-                <div class="invalid-feedback">Nome de usuário obrigatório</div>
+                <div v-if="$v.username.$error" class="text-danger">
+                  Deve conter ao menos 3 caracteres
+                </div>
               </div>
             </label>
           </div>
@@ -30,19 +33,19 @@
       <div class="row py-1 justify-content-center">
         <div class="col-6">
           <div class="row justify-content-center">
-            <label for="validationEmail" class="form-label row">
+            <label for="email" class="form-label row">
               <span class="fs-5">Email</span>
               <div class="col-11">
                 <input
                   type="email"
                   class="form-control mt-1"
-                  id="validationEmail"
+                  id="emal"
                   placeholder="Exemplo@email.com"
                   required
-                  minlength="6"
-                  v-model="email"
+                  v-model="$v.email.$model"
+                  :class="{ error: $v.email.$error, success: !$v.email.$error }"
                 />
-                <div class="invalid-feedback">Email obrigatório</div>
+                <div v-if="$v.email.$error" class="text-danger">Este email é inválido</div>
               </div>
             </label>
           </div>
@@ -51,7 +54,7 @@
       <div class="row py-1 justify-content-center">
         <div class="col-6">
           <div class="row justify-content-center">
-            <label for="validationSenha" class="form-label row">
+            <label for="password" class="form-label row">
               <span class="fs-5">Senha</span>
               <div class="col-10">
                 <input
@@ -59,12 +62,15 @@
                   minlength="8"
                   maxlength="16"
                   class="senha form-control mt-1"
-                  id="validationPassword"
+                  id="password"
                   placeholder="Insira uma senha"
                   required
-                  v-model="password"
+                  v-model="$v.password.$model"
+                  :class="{ error: $v.password.$error, success: !$v.password.$error }"
                 />
-                <div id="feedback-password" class="invalid-feedback">Senha obrigatória</div>
+                <div v-if="$v.password.$error" class="text-danger">
+                  Deve conter de 8 a 16 caracteres
+                </div>
               </div>
               <div class="col-1 d-flex align-items-start px-0 py-1">
                 <button @click="togglePassword" type="button" class="btn btn-default p-0">
@@ -79,7 +85,7 @@
       <div class="row py-1 justify-content-center">
         <div class="col-6">
           <div class="row justify-content-center">
-            <label for="validationConfirmarSenha" class="form-label row">
+            <label for="password-confirm" class="form-label row">
               <span class="fs-5">Confimar senha</span>
               <div class="col-10">
                 <input
@@ -87,13 +93,17 @@
                   minlength="8"
                   maxlength="16"
                   class="confirmar-senha form-control mt-1"
-                  id="validationPasswordConfirm"
+                  id="password-confirm"
                   placeholder="Confirme a senha"
                   required
-                  v-model="password_confirm"
+                  v-model="$v.password_confirm.$model"
+                  :class="{
+                    error: $v.password_confirm.$error,
+                    success: !$v.password_confirm.$error,
+                  }"
                 />
-                <div id="feedback-password-confirm" class="invalid-feedback">
-                  Confirmação de senha obrigatória
+                <div v-if="$v.password_confirm.$error" class="text-danger">
+                  As senhas não coincidem
                 </div>
               </div>
               <div class="col-1 d-flex align-items-start px-0 py-1">
@@ -108,7 +118,7 @@
       </div>
       <div class="row py-1 justify-content-center">
         <div class="col-6 d-flex justify-content-center">
-          <button :disabled="isDisableButton" type="submit" class="btn btn-primary">
+          <button :disabled="$v.$invalid" type="submit" class="btn btn-primary">
             Criar Conta
           </button>
         </div>
@@ -122,33 +132,19 @@
         </div>
       </div>
     </form>
-    <div
-      v-if="showErrorMessage"
-      class="alert alert-danger alert-dismissible fade show"
-      role="alert"
-    >
-      {{ mensageError }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <div
-      v-if="showErrorMessage"
-      class="toast"
-      role="alert"
-      aria-live="assertive"
-      aria-atomic="true"
-    >
-      <div class="toast-header">
-        <strong class="me-auto">Error</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">{{ mensageError }}</div>
-    </div>
   </div>
 </template>
 
 <script>
 import Titulo from '@/components/common/Titulo.vue';
 import api from '@/api';
+import {
+  required,
+  minLength,
+  maxLength,
+  email,
+  sameAs,
+} from 'vuelidate/lib/validators';
 
 export default {
   name: 'FormCriarConta',
@@ -162,35 +158,35 @@ export default {
       password: '',
       password_confirm: '',
       inputType: 'password',
-      mensageError: '',
-      showErrorMessage: false,
     };
+  },
+  validations: {
+    username: {
+      required,
+      minLength: minLength(3),
+    },
+    email: {
+      required,
+      email,
+    },
+    password: {
+      required,
+      minLength: minLength(8),
+      maxLength: maxLength(16),
+    },
+    password_confirm: {
+      required,
+      minLength: minLength(8),
+      maxLength: maxLength(16),
+      sameAs: sameAs('password'),
+    },
   },
   computed: {
     isPassword() {
       return this.inputType === 'password';
     },
-    isEmptyName() {
-      return !this.username;
-    },
-    isEmptyEmail() {
-      return !this.email;
-    },
-    isDisableButton() {
-      return this.isEmptyName === this.isEmptyEmail;
-    },
   },
   methods: {
-    checkForm() {
-      if (this.password !== this.password_confirm) {
-        console.log('Erro');
-        this.showErrorMessage = true;
-        this.mensageError = 'Password inválido';
-        return;
-      }
-      this.save();
-      console.log('checkForm');
-    },
     save() {
       const data = {
         username: this.username,
@@ -207,23 +203,6 @@ export default {
           console.log(error);
         });
     },
-    validation() {
-      const forms = document.querySelectorAll('.needs-validation');
-      Array.from(forms).forEach((form) => {
-        form.addEventListener(
-          'submit',
-          (event) => {
-            if (!form.checkValidity()) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-
-            form.classList.add('was-validated');
-          },
-          false,
-        );
-      });
-    },
     togglePassword() {
       if (this.isPassword) {
         this.inputType = 'text';
@@ -232,8 +211,11 @@ export default {
       }
     },
   },
-  mounted() {
-    this.validation();
-  },
 };
 </script>
+
+<style scoped>
+.error {
+  border: 1px solid red;
+}
+</style>
