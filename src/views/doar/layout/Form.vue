@@ -1,51 +1,61 @@
 <template>
   <div class="container bg-light rounded shadow-lg mt-5 py-3">
-    <form class="needs-validation" novalidate>
+    <form @submit.prevent="save()">
       <div class="row py-4 justify-content-center">
-        <label for="validationTitulo" class="col-11 form-label">
+        <label for="titulo" class="col-11 form-label">
           <span class="fs-5">Título</span>
           <input
             type="text"
             class="form-control mt-1"
-            id="validationTitulo"
+            id="titulo"
             placeholder="Insira um título para o seu anúncio"
             required
             minlength="3"
-            v-model="doacao.titulo"
+            v-model="$v.titulo.$model"
+            :class="{ error: $v.titulo.$error, success: !$v.titulo.$error }"
           />
-          <div class="invalid-feedback">Título obrigatório</div>
+          <div v-if="$v.titulo.$error" class="text-danger">Deve conter ao menos 3 caracteres</div>
         </label>
       </div>
       <div class="row justify-content-center">
-        <label for="validationDescricao" class="col-11 form-label">
+        <label for="descricao" class="col-11 form-label">
           <span class="fs-5">Descrição</span>
           <textarea
             class="form-control mt-1"
-            id="validationDescricao"
+            id="descricao"
             placeholder="Insira uma descrição para o seu anúncio"
             rows="4"
             required
             minlength="10"
-            v-model="doacao.descricao"
+            v-model="$v.descricao.$model"
+            :class="{ error: $v.descricao.$error, success: !$v.descricao.$error }"
           >
           </textarea>
-          <div class="invalid-feedback">Descrição obrigatória</div>
+          <div v-if="$v.descricao.$error" class="text-danger">
+            Deve conter ao menos 10 caracteres
+          </div>
         </label>
       </div>
       <div class="row py-4 justify-content-center">
-        <label for="validationCategoria" class="col-11 form-label">
+        <label for="categoria" class="col-11 form-label">
           <span class="fs-5">Categoria</span>
-          <select class="form-select" required aria-label="categoria" v-model="doacao.categoria">
+          <select
+            class="form-select"
+            required
+            aria-label="categoria"
+            v-model="$v.categoria.$model"
+            :class="{ error: $v.categoria.$error, success: !$v.categoria.$error }"
+          >
             <option value="">Selecione</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
           </select>
-          <div class="invalid-feedback">Categoria obrigatória</div>
+          <div v-if="$v.categoria.$error" class="text-danger">Categoria requerida</div>
         </label>
       </div>
       <div class="row justify-content-center">
-        <label for="validationCategoria" class="col-11 form-label">
+        <label for="imagem" class="col-11 form-label">
           <div class="row justify-content-center">
             <div class="col-4 d-flex justify-content-center">
               <span class="fs-5">Imagem</span>
@@ -61,7 +71,7 @@
       <div class="row py-4 justify-content-center">
         <div class="col-11 d-flex justify-content-between">
           <button @click="limpar" class="btn btn-secondary" type="button">Cancelar</button>
-          <button @click="save" class="btn btn-primary" type="submit">Anunciar</button>
+          <button :disabled="$v.$invalid" type="submit" class="btn btn-primary">Anunciar</button>
         </div>
       </div>
     </form>
@@ -70,87 +80,61 @@
 
 <script>
 import api from '@/api';
+import { required, minLength } from 'vuelidate/lib/validators';
 
 export default {
   name: 'FormAnuncio',
   data() {
     return {
-      doacao: {
-        titulo: '',
-        descricao: '',
-        categoria: '',
-        type: 'donation',
-        user: '6335de74c2b79def9b3ce1da',
-      },
+      titulo: '',
+      descricao: '',
+      categoria: '',
+      type: 'donation',
+      user: '6335de74c2b79def9b3ce1da',
     };
+  },
+  validations: {
+    titulo: {
+      required,
+      minLength: minLength(3),
+    },
+    descricao: {
+      required,
+      minLength: minLength(10),
+    },
+    categoria: {
+      required,
+    },
   },
   methods: {
     save() {
       const data = {
-        title: this.doacao.titulo,
-        description: this.doacao.descricao,
-        category: this.doacao.categoria,
-        type: this.doacao.type,
-        user: this.doacao.user,
+        title: this.titulo,
+        description: this.descricao,
+        category: this.categoria,
+        type: this.type,
+        user: this.user,
       };
-      if (
-        this.notNull() === true
-        && this.lengthValidation() === true
-      ) {
-        api
-          .post('/announcement', data)
-          .then(() => {
-            console.log('Announcement successfully saved');
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
+      api
+        .post('/announcement', data)
+        .then(() => {
+          console.log('Announcement successfully saved');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     limpar() {
-      this.doacao.titulo = '';
-      this.doacao.descricao = '';
-      this.doacao.categoria = '';
+      this.titulo = '';
+      this.descricao = '';
+      this.categoria = '';
     },
-    validacao() {
-      const forms = document.querySelectorAll('.needs-validation');
-      Array.from(forms).forEach((form) => {
-        form.addEventListener(
-          'submit',
-          (event) => {
-            if (!form.checkValidity()) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-
-            form.classList.add('was-validated');
-          },
-          false,
-        );
-      });
-    },
-    notNull() {
-      if (
-        this.doacao.titulo !== ''
-        && this.doacao.descricao !== ''
-        && this.doacao.categoria !== ''
-      ) {
-        return true;
-      }
-      return false;
-    },
-    lengthValidation() {
-      if (
-        this.doacao.titulo.length >= 3
-        && this.doacao.descricao.length >= 10
-      ) {
-        return true;
-      }
-      return false;
-    },
-  },
-  mounted() {
-    this.validacao();
   },
 };
 </script>
+
+<style scoped>
+.error {
+  border: 1px solid red;
+}
+</style>
