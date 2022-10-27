@@ -119,6 +119,7 @@ export default {
         .post('/announcement', data)
         .then(() => {
           console.log('Announcement successfully saved');
+          this.$router.push({ path: '/minhas-doacoes' });
         })
         .catch((error) => {
           console.log(error);
