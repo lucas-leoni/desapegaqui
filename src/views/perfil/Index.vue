@@ -1,16 +1,16 @@
 <template>
   <div class="container py-5 px-0">
-    <Titulo titulo="Perfil" />
+    <Form />
   </div>
 </template>
 
 <script>
-import Titulo from '@/components/common/Titulo.vue';
+import Form from '@/views/perfil/layout/Form.vue';
 
 export default {
   name: 'PerfilView',
   components: {
-    Titulo,
+    Form,
   },
 };
 </script>

@@ -12,6 +12,7 @@ import LoginView from '@/views/login/Index.vue';
 import PerfilView from '@/views/perfil/Index.vue';
 import MinhasDoacoesView from '@/views/minhas-doacoes/Index.vue';
 import MinhasNecessidadesView from '@/views/minhas-necessidades/Index.vue';
+import FavoritosView from '@/views/favoritos/Index.vue';
 
 Vue.use(VueRouter);
 
@@ -75,6 +76,11 @@ const routes = [
     path: '/minhas-necessidades',
     name: 'minhasNecessidades',
     component: MinhasNecessidadesView,
+  },
+  {
+    path: '/favoritos',
+    name: 'favoritos',
+    component: FavoritosView,
   },
 ];
 
