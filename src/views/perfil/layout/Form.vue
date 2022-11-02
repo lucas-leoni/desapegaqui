@@ -483,6 +483,7 @@ export default {
       this.complement = '';
       this.ddd = '';
       this.telephone = '';
+      this.$v.ddd.$error = false;
     },
   },
   mounted() {
