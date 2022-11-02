@@ -1,6 +1,6 @@
 <template>
   <div class="container bg-light rounded shadow-lg mt-3 py-3">
-    <form @submit.prevent="save()">
+    <form @submit.prevent="update()">
       <div class="row py-3 justify-content-evenly">
         <div class="col-5">
           <div class="row justify-content-center">
@@ -284,10 +284,10 @@
       </div>
       <div class="row py-3 justify-content-evenly">
         <div class="col-5">
-          <button @click="limpar" class="btn btn-secondary" type="button">Cancelar</button>
+          <button @click="limpar" class="btn btn-secondary" type="button">Limpar</button>
         </div>
         <div class="col-5 d-flex justify-content-end">
-          <button :disabled="$v.$invalid" type="submit" class="btn btn-primary">Salvar</button>
+          <button :disabled="$v.$invalid" type="submit" class="btn btn-primary">Atualizar</button>
         </div>
       </div>
     </form>
@@ -388,7 +388,7 @@ export default {
     },
   },
   methods: {
-    /* save() {
+    /* update() {
       const data = {
         username: this.username,
         email: this.email,
@@ -403,11 +403,36 @@ export default {
         ddd: this.ddd,
         telephone: this.telephone,
       };
+      const { id } = this.$route.params;
       api
-        .put('/users/', data)
+        .put(`/user/${id}`, data)
         .then(() => {
-          console.log('Announcement successfully saved');
-          this.$router.push({ path: '/minhas-doacoes' });
+          console.log('User successfully updated');
+          this.getData();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getData() {
+      const { id } = this.$route.params;
+      api
+        .get(`/user/${id}`)
+        .then((response) => {
+          this.username = response.data.username;
+          this.email = response.data.email;
+          this.password = response.data.password;
+          this.password_confirm = response.data.password;
+          this.cep = response.data.cep;
+          this.city = response.data.city;
+          this.state = response.data.state;
+          this.street = response.data.street;
+          this.number = response.data.number;
+          this.neighborhood = response.data.neighborhood;
+          this.complement = response.data.complement;
+          this.ddd = response.data.ddd;
+          this.telephone = response.data.telephone;
+          console.log('User successfully getted');
         })
         .catch((error) => {
           console.log(error);
