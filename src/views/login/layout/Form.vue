@@ -125,9 +125,14 @@ export default {
       };
       api
         .post('/login', data)
-        .then(() => {
-          console.log('User successfully logged');
-          this.$router.push({ path: '/perfil' });
+        .then((response) => {
+          const { _id } = response.data;
+          if (data.password === response.data.password) {
+            console.log('User successfully logged');
+            this.$router.push({ path: `/perfil/${_id}` });
+          } else {
+            alert('Senha Incorreta!');
+          }
         })
         .catch((error) => {
           console.log(error);
