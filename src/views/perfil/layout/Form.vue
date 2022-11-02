@@ -296,7 +296,7 @@
 
 <script>
 import axios from 'axios';
-/* import api from '@/api'; */
+import api from '@/api';
 import {
   required,
   minLength,
@@ -413,7 +413,7 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-    },
+    }, */
     getData() {
       const { id } = this.$route.params;
       api
@@ -437,7 +437,7 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-    }, */
+    },
     getAddress() {
       const { cep } = this;
       axios
@@ -479,6 +479,9 @@ export default {
       this.ddd = '';
       this.telephone = '';
     },
+  },
+  mounted() {
+    this.getData();
   },
 };
 </script>
