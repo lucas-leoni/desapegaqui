@@ -388,32 +388,37 @@ export default {
     },
   },
   methods: {
-    /* update() {
+    update() {
       const data = {
         username: this.username,
         email: this.email,
         password: this.password,
-        cep: this.cep,
-        city: this.city,
-        state: this.state,
-        street: this.street,
-        number: this.number,
-        neighborhood: this.neighborhood,
-        complement: this.complement,
-        ddd: this.ddd,
-        telephone: this.telephone,
+        address: {
+          cep: this.cep,
+          city: this.city,
+          state: this.state,
+          street: this.street,
+          number: this.number,
+          neighborhood: this.neighborhood,
+          complement: this.complement,
+        },
+        contact: {
+          ddd: this.ddd,
+          telephone: this.telephone,
+        },
       };
       const { id } = this.$route.params;
       api
         .put(`/user/${id}`, data)
         .then(() => {
-          console.log('User successfully updated');
           this.getData();
+          console.log('User successfully updated');
+          alert('Dados atualizados!');
         })
         .catch((error) => {
           console.log(error);
         });
-    }, */
+    },
     getData() {
       const { id } = this.$route.params;
       api
@@ -423,15 +428,15 @@ export default {
           this.email = response.data.email;
           this.password = response.data.password;
           this.password_confirm = response.data.password;
-          this.cep = response.data.cep;
-          this.city = response.data.city;
-          this.state = response.data.state;
-          this.street = response.data.street;
-          this.number = response.data.number;
-          this.neighborhood = response.data.neighborhood;
-          this.complement = response.data.complement;
-          this.ddd = response.data.ddd;
-          this.telephone = response.data.telephone;
+          this.cep = response.data.address.cep;
+          this.city = response.data.address.city;
+          this.state = response.data.address.state;
+          this.street = response.data.address.street;
+          this.number = response.data.address.number;
+          this.neighborhood = response.data.address.neighborhood;
+          this.complement = response.data.address.complement;
+          this.ddd = response.data.contact.ddd;
+          this.telephone = response.data.contact.telephone;
           console.log('User successfully getted');
         })
         .catch((error) => {
