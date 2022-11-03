@@ -4,14 +4,13 @@
     <Filtro class="px-3" />
     <div class="container-fluid px-1">
       <div class="row">
-        <CardMeuAnuncio />
-        <CardMeuAnuncio />
-        <CardMeuAnuncio />
-        <CardMeuAnuncio />
-        <CardMeuAnuncio />
-        <CardMeuAnuncio />
-        <CardMeuAnuncio />
-        <CardMeuAnuncio />
+        <div
+          class="col-3 d-flex justify-content-center mb-4"
+          v-for="necessity in necessities"
+          :key="necessity.id"
+        >
+          <CardMeuAnuncio :announcement="necessity" />
+        </div>
       </div>
     </div>
   </div>
@@ -29,5 +28,68 @@ export default {
     Filtro,
     CardMeuAnuncio,
   },
+  data() {
+    return {
+      necessities: [
+        {
+          title: 'Título',
+          description: 'Descrição',
+          received: true,
+        },
+        {
+          title: 'Título',
+          description: 'Descrição',
+          received: false,
+        },
+        {
+          title: 'Título',
+          description: 'Descrição',
+          received: false,
+        },
+        {
+          title: 'Título',
+          description: 'Descrição',
+          received: true,
+        },
+        {
+          title: 'Título',
+          description: 'Descrição',
+          received: true,
+        },
+        {
+          title: 'Título',
+          description: 'Descrição',
+          received: false,
+        },
+        {
+          title: 'Título',
+          description: 'Descrição',
+          received: true,
+        },
+        {
+          title: 'Título',
+          description: 'Descrição',
+          received: false,
+        },
+      ],
+    };
+  },
+  /* methods: {
+    getMyNecessities() {
+      api
+        .get('/my-necessities')
+        .then((response) => {
+          console.log('Minhas necessidades: ', response.data);
+          this.necessities = response.data;
+          console.log('Minhas necessidades: ', this.necessities);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+  mounted() {
+    this.getMyNecessities();
+  }, */
 };
 </script>

@@ -4,14 +4,13 @@
     <Filtro class="px-3" />
     <div class="container-fluid px-1">
       <div class="row">
-        <CardMeuAnuncio />
-        <CardMeuAnuncio />
-        <CardMeuAnuncio />
-        <CardMeuAnuncio />
-        <CardMeuAnuncio />
-        <CardMeuAnuncio />
-        <CardMeuAnuncio />
-        <CardMeuAnuncio />
+        <div
+          class="col-3 d-flex justify-content-center mb-4"
+          v-for="donation in donations"
+          :key="donation.id"
+        >
+          <CardMeuAnuncio :announcement="donation" />
+        </div>
       </div>
     </div>
   </div>
@@ -29,5 +28,68 @@ export default {
     Filtro,
     CardMeuAnuncio,
   },
+  data() {
+    return {
+      donations: [
+        {
+          title: 'Título',
+          description: 'Descrição',
+          donated: true,
+        },
+        {
+          title: 'Título',
+          description: 'Descrição',
+          donated: false,
+        },
+        {
+          title: 'Título',
+          description: 'Descrição',
+          donated: false,
+        },
+        {
+          title: 'Título',
+          description: 'Descrição',
+          donated: true,
+        },
+        {
+          title: 'Título',
+          description: 'Descrição',
+          donated: true,
+        },
+        {
+          title: 'Título',
+          description: 'Descrição',
+          donated: false,
+        },
+        {
+          title: 'Título',
+          description: 'Descrição',
+          donated: true,
+        },
+        {
+          title: 'Título',
+          description: 'Descrição',
+          donated: false,
+        },
+      ],
+    };
+  },
+  /* methods: {
+    getMyDonations() {
+      api
+        .get('/my-donations')
+        .then((response) => {
+          console.log('Minhas doações: ', response.data);
+          this.donations = response.data;
+          console.log('Minhas doações: ', this.donations);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+  mounted() {
+    this.getMyDonations();
+  }, */
 };
 </script>
