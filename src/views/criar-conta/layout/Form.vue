@@ -195,9 +195,10 @@ export default {
       };
       api
         .post('/user', data)
-        .then(() => {
+        .then((response) => {
+          const { _id } = response.data;
           console.log('User successfully registered');
-          this.$router.push({ path: '/perfil' });
+          this.$router.push({ path: `/perfil/${_id}` });
         })
         .catch((error) => {
           console.log(error);
