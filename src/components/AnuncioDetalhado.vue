@@ -4,8 +4,8 @@
       <div class="card">
         <img src="../assets/logo-nova.png" class="card-img-top" alt="img-anuncio" />
         <div class="card-body">
-          <h5 class="card-title">Título</h5>
-          <p class="card-text">Descrição</p>
+          <h5 class="card-title">{{ announcement.title }}</h5>
+          <p class="card-text">{{ announcement.description }}</p>
         </div>
       </div>
     </div>
@@ -14,12 +14,12 @@
         <div class="col">
           <div class="row py-2">
             <div class="col d-flex justify-content-center">
-              <h5 class="m-0">Anunciante: Nome do anunciante</h5>
+              <h5 class="m-0">Anunciante: {{ announcement.user.username }}</h5>
             </div>
           </div>
           <div class="row py-2">
             <div class="col d-flex justify-content-center">
-              <h6 class="m-0">Data de publicação: DD/MM/AAAA</h6>
+              <h6 class="m-0">Data de publicação: {{ announcement.createdAt }}</h6>
             </div>
           </div>
           <div class="row py-2">
@@ -55,8 +55,15 @@
 </template>
 
 <script>
+
 export default {
   name: 'AnuncioDetalhado',
+  props: {
+    announcement: {
+      type: Object,
+      required: true,
+    },
+  },
 };
 </script>
 

@@ -39,9 +39,7 @@ export default {
       api
         .get('/necessity-announcements')
         .then((response) => {
-          console.log('Anúncios: ', response.data);
           this.announcements = response.data;
-          console.log('Anúncios: ', this.announcements);
         })
         .catch((error) => {
           console.log(error);
