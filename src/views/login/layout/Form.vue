@@ -60,9 +60,7 @@
       </div>
       <div class="row py-1 justify-content-center">
         <div class="col-6 d-flex justify-content-center">
-          <button :disabled="$v.$invalid" type="submit" class="btn btn-primary">
-            Fazer Login
-          </button>
+          <button :disabled="$v.$invalid" type="submit" class="btn btn-primary">Fazer Login</button>
         </div>
       </div>
       <div class="row py-1 justify-content-center">
