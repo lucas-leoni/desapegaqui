@@ -27,7 +27,18 @@
             </router-link>
           </div>
           <div class="col d-flex justify-content-end">
-            <router-link to="" class="btn btn-warning me-2">
+            <router-link
+              v-if="donation"
+              :to="`/editar-doacao/${announcement._id}`"
+              class="btn btn-warning me-2"
+            >
+              <i class="bi bi-pencil-fill"></i>
+            </router-link>
+            <router-link
+              v-if="necessity"
+              :to="`/editar-necessidade/${announcement._id}`"
+              class="btn btn-warning me-2"
+            >
               <i class="bi bi-pencil-fill"></i>
             </router-link>
             <router-link @click.native="remove()" to="" class="btn btn-danger">

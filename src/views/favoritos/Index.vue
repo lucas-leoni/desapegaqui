@@ -35,34 +35,42 @@ export default {
         {
           title: 'Título',
           description: 'Descrição',
+          type: 'donation',
         },
         {
           title: 'Título',
           description: 'Descrição',
+          type: 'necessity',
         },
         {
           title: 'Título',
           description: 'Descrição',
+          type: 'necessity',
         },
         {
           title: 'Título',
           description: 'Descrição',
+          type: 'donation',
         },
         {
           title: 'Título',
           description: 'Descrição',
+          type: 'necessity',
         },
         {
           title: 'Título',
           description: 'Descrição',
+          type: 'donation',
         },
         {
           title: 'Título',
           description: 'Descrição',
+          type: 'donation',
         },
         {
           title: 'Título',
           description: 'Descrição',
+          type: 'necessity',
         },
       ],
     };

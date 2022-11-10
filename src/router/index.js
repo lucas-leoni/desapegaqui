@@ -13,6 +13,8 @@ import PerfilView from '@/views/perfil/Index.vue';
 import MinhasDoacoesView from '@/views/minhas-doacoes/Index.vue';
 import MinhasNecessidadesView from '@/views/minhas-necessidades/Index.vue';
 import FavoritosView from '@/views/favoritos/Index.vue';
+import EditarDoacaoView from '@/views/editar-doacao/Index.vue';
+import EditarNecessidadeView from '@/views/editar-necessidade/Index.vue';
 
 Vue.use(VueRouter);
 
@@ -81,6 +83,16 @@ const routes = [
     path: '/favoritos',
     name: 'favoritos',
     component: FavoritosView,
+  },
+  {
+    path: '/editar-doacao/:id',
+    name: 'editarDoacao',
+    component: EditarDoacaoView,
+  },
+  {
+    path: '/editar-necessidade/:id',
+    name: 'editarNecessidade',
+    component: EditarNecessidadeView,
   },
 ];
 
