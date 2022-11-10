@@ -47,9 +47,17 @@
             :class="{ error: $v.categoria.$error, success: !$v.categoria.$error }"
           >
             <option value="">Selecione</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+            <option value="Brinquedos">Brinquedos</option>
+            <option value="Construção">Construção</option>
+            <option value="Eletrodomésticos">Eletrodomésticos</option>
+            <option value="Higiene Pessoal">Higiene Pessoal</option>
+            <option value="Itens para Pets">Itens para Pets</option>
+            <option value="Livros">Livros</option>
+            <option value="Mantimentos">Mantimentos</option>
+            <option value="Móveis">Móveis</option>
+            <option value="Outros">Outros</option>
+            <option value="Produtos de Limpeza">Produtos de Limpeza</option>
+            <option value="Roupas">Roupas</option>
           </select>
           <div v-if="$v.categoria.$error" class="text-danger">Categoria requerida</div>
         </label>
