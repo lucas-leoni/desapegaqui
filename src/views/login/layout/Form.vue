@@ -126,6 +126,12 @@ export default {
         .then((response) => {
           const { _id } = response.data;
           if (data.password === response.data.password) {
+            const userLogged = {
+              id: _id,
+              username: response.data.username,
+            };
+            localStorage.removeItem('userLogged');
+            localStorage.setItem('userLogged', JSON.stringify(userLogged));
             console.log('User successfully logged');
             this.$router.push({ path: `/perfil/${_id}` });
           } else {

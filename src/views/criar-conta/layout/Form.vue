@@ -197,6 +197,12 @@ export default {
         .post('/user', data)
         .then((response) => {
           const { _id } = response.data;
+          const userLogged = {
+            id: _id,
+            username: response.data.username,
+          };
+          localStorage.removeItem('userLogged');
+          localStorage.setItem('userLogged', JSON.stringify(userLogged));
           console.log('User successfully registered');
           this.$router.push({ path: `/perfil/${_id}` });
         })
