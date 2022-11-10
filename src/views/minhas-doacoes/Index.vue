@@ -20,6 +20,7 @@
 import Titulo from '@/components/common/Titulo.vue';
 import Filtro from '@/components/Filtro.vue';
 import CardMeuAnuncio from '@/components/CardMeuAnuncio.vue';
+import api from '@/api';
 
 export default {
   name: 'MinhasDoacoes',
@@ -30,58 +31,19 @@ export default {
   },
   data() {
     return {
-      donations: [
-        {
-          title: 'Título',
-          description: 'Descrição',
-          donated: true,
-        },
-        {
-          title: 'Título',
-          description: 'Descrição',
-          donated: false,
-        },
-        {
-          title: 'Título',
-          description: 'Descrição',
-          donated: false,
-        },
-        {
-          title: 'Título',
-          description: 'Descrição',
-          donated: true,
-        },
-        {
-          title: 'Título',
-          description: 'Descrição',
-          donated: true,
-        },
-        {
-          title: 'Título',
-          description: 'Descrição',
-          donated: false,
-        },
-        {
-          title: 'Título',
-          description: 'Descrição',
-          donated: true,
-        },
-        {
-          title: 'Título',
-          description: 'Descrição',
-          donated: false,
-        },
-      ],
+      donations: [],
     };
   },
-  /* methods: {
+  methods: {
     getMyDonations() {
+      let userStorage = localStorage.getItem('userLogged');
+      userStorage = JSON.parse(userStorage);
+      const { id } = userStorage;
       api
-        .get('/my-donations')
+        .get(`/my-donation-announcements/${id}`)
         .then((response) => {
-          console.log('Minhas doações: ', response.data);
           this.donations = response.data;
-          console.log('Minhas doações: ', this.donations);
+          this.donations = this.donations.reverse();
         })
         .catch((error) => {
           console.log(error);
@@ -90,6 +52,6 @@ export default {
   },
   mounted() {
     this.getMyDonations();
-  }, */
+  },
 };
 </script>

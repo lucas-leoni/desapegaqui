@@ -40,6 +40,7 @@ export default {
         .get('/necessity-announcements')
         .then((response) => {
           this.announcements = response.data;
+          this.announcements = this.announcements.reverse();
         })
         .catch((error) => {
           console.log(error);

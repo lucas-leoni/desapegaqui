@@ -20,6 +20,7 @@
 import Titulo from '@/components/common/Titulo.vue';
 import Filtro from '@/components/Filtro.vue';
 import CardMeuAnuncio from '@/components/CardMeuAnuncio.vue';
+import api from '@/api';
 
 export default {
   name: 'MinhasNecessidades',
@@ -30,58 +31,19 @@ export default {
   },
   data() {
     return {
-      necessities: [
-        {
-          title: 'Título',
-          description: 'Descrição',
-          received: true,
-        },
-        {
-          title: 'Título',
-          description: 'Descrição',
-          received: false,
-        },
-        {
-          title: 'Título',
-          description: 'Descrição',
-          received: false,
-        },
-        {
-          title: 'Título',
-          description: 'Descrição',
-          received: true,
-        },
-        {
-          title: 'Título',
-          description: 'Descrição',
-          received: true,
-        },
-        {
-          title: 'Título',
-          description: 'Descrição',
-          received: false,
-        },
-        {
-          title: 'Título',
-          description: 'Descrição',
-          received: true,
-        },
-        {
-          title: 'Título',
-          description: 'Descrição',
-          received: false,
-        },
-      ],
+      necessities: [],
     };
   },
-  /* methods: {
+  methods: {
     getMyNecessities() {
+      let userStorage = localStorage.getItem('userLogged');
+      userStorage = JSON.parse(userStorage);
+      const { id } = userStorage;
       api
-        .get('/my-necessities')
+        .get(`/my-necessity-announcements/${id}`)
         .then((response) => {
-          console.log('Minhas necessidades: ', response.data);
           this.necessities = response.data;
-          console.log('Minhas necessidades: ', this.necessities);
+          this.necessities = this.necessities.reverse();
         })
         .catch((error) => {
           console.log(error);
@@ -90,6 +52,6 @@ export default {
   },
   mounted() {
     this.getMyNecessities();
-  }, */
+  },
 };
 </script>
