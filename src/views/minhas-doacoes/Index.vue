@@ -9,7 +9,7 @@
           v-for="donation in donations"
           :key="donation.id"
         >
-          <CardMeuAnuncio :announcement="donation" />
+          <CardMeuAnuncio :announcement="donation" @update="getMyDonations()" />
         </div>
       </div>
     </div>

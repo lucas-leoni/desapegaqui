@@ -9,7 +9,7 @@
           v-for="necessity in necessities"
           :key="necessity.id"
         >
-          <CardMeuAnuncio :announcement="necessity" />
+          <CardMeuAnuncio :announcement="necessity" @update="getMyNecessities()"/>
         </div>
       </div>
     </div>
