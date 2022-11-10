@@ -90,7 +90,7 @@ export default {
       descricao: '',
       categoria: '',
       type: 'donation',
-      user: '6335de74c2b79def9b3ce1da',
+      user: '',
     };
   },
   validations: {
@@ -107,6 +107,11 @@ export default {
     },
   },
   methods: {
+    getUserLogged() {
+      let userStorage = localStorage.getItem('userLogged');
+      userStorage = JSON.parse(userStorage);
+      this.user = userStorage.id;
+    },
     save() {
       const data = {
         title: this.titulo,
@@ -130,6 +135,9 @@ export default {
       this.descricao = '';
       this.categoria = '';
     },
+  },
+  mounted() {
+    this.getUserLogged();
   },
 };
 </script>
