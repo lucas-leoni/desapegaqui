@@ -40,15 +40,31 @@
           <li class="nav-item px-2 d-flex align-items-center fs-6">
             <router-link to="/necessidades" class="nav-link">Consultar necessidades</router-link>
           </li>
-          <li class="nav-item px-2 d-flex align-items-center fs-6">
+          <li v-if="show" class="nav-item px-2 d-flex align-items-center fs-6">
             <router-link to="/criar-conta" class="nav-link criar-conta">
               <button type="button" class="btn btn-sm btn-outline-primary">Criar Conta</button>
             </router-link>
           </li>
-          <li class="nav-item px-2 d-flex align-items-center fs-6">
+          <li v-if="show" class="nav-item px-2 d-flex align-items-center fs-6">
             <router-link to="/login" class="nav-link login">
               <button id="login" type="button" class="btn btn-sm btn-primary">Login</button>
             </router-link>
+          </li>
+          <li v-else class="nav-item dropdown">
+            <router-link
+              to=""
+              class="nav-link dropdown-toggle hello"
+              data-bs-toggle="dropdown"
+              aria-expanded="false">
+                Olá, {{value()}}
+            </router-link>
+            <ul class="dropdown-menu dropdown-menu-dark border border-0 p-0">
+              <li>
+                <router-link to="/" class="nav-link sair text-white">
+                  Sair
+                </router-link>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>
@@ -59,15 +75,28 @@
 <script>
 export default {
   name: 'NavbarApp',
+  computed: {
+    show() {
+      return this.$route.name !== 'perfil' && this.$route.name !== 'doar' && this.$route.name !== 'cadastrarNecessidade';
+    },
+  },
+  methods: {
+    value() {
+      let value = window.localStorage.getItem('userLogged');
+      value = JSON.parse(value);
+      value = value.username;
+      return value;
+    },
+  },
 };
 </script>
 
 <style scoped>
-.nav-link:hover:not(.criar-conta, .login) {
+.nav-link:hover:not(.criar-conta, .login, .sair) {
   border-bottom: 3px solid #E64242;
 }
 
-.router-link-active:not(.link-logo) {
+.router-link-active:not(.link-logo, .sair, .hello) {
   border-bottom: 3px solid #E64242 !important;
 }
 
@@ -113,7 +142,6 @@ nav {
 }
 .navbar-nav {
   position: absolute;
-  background: #282828;
   background: rgba(40, 40, 40, 0.9);
   top: 100%;
   right: 4rem;
@@ -136,6 +164,10 @@ nav {
 }
 .router-link-active:not(.link-logo) {
   color: white !important;
+}
+.dropdown-menu {
+  background: #3B3B3B !important;
+  border: none;
 }
 }
 </style>
