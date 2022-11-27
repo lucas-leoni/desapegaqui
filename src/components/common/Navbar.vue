@@ -53,12 +53,18 @@
           <li v-else class="nav-item dropdown">
             <router-link
               to=""
+              :id="border()"
               class="nav-link dropdown-toggle hello"
               data-bs-toggle="dropdown"
               aria-expanded="false">
-                Olá, {{value()}}
+                Olá, {{username()}}
             </router-link>
             <ul class="dropdown-menu dropdown-menu-dark border border-0 p-0">
+              <li>
+                <router-link :to="`/perfil/${id()}`" class="nav-link sair text-white">
+                  Perfil
+                </router-link>
+              </li>
               <li>
                 <router-link to="/" class="nav-link sair text-white">
                   Sair
@@ -77,14 +83,25 @@ export default {
   name: 'NavbarApp',
   computed: {
     show() {
-      return this.$route.name !== 'perfil' && this.$route.name !== 'doar' && this.$route.name !== 'cadastrarNecessidade';
+      return this.$route.name === 'home';
     },
   },
   methods: {
-    value() {
+    border() {
+      if (this.$route.name === 'perfil') {
+        return 'border';
+      } return '';
+    },
+    username() {
       let value = window.localStorage.getItem('userLogged');
       value = JSON.parse(value);
       value = value.username;
+      return value;
+    },
+    id() {
+      let value = window.localStorage.getItem('userLogged');
+      value = JSON.parse(value);
+      value = value.id;
       return value;
     },
   },
@@ -97,6 +114,10 @@ export default {
 }
 
 .router-link-active:not(.link-logo, .sair, .hello) {
+  border-bottom: 3px solid #E64242 !important;
+}
+
+#border {
   border-bottom: 3px solid #E64242 !important;
 }
 
