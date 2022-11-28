@@ -1,12 +1,12 @@
 <template>
-  <div class="container bg-light rounded shadow-lg mt-5 py-3">
+  <div class="container bg-light rounded shadow-lg mt-4 py-1">
     <form @submit.prevent="save()">
-      <div class="row py-4 justify-content-center">
+      <div class="row py-2 justify-content-center">
         <label for="titulo" class="col-11 form-label">
-          <span class="fs-5">Título</span>
+          <span class="fs-6">Título</span>
           <input
             type="text"
-            class="form-control mt-1"
+            class="form-control form-control-sm mt-1"
             id="titulo"
             placeholder="Insira um título para o seu anúncio"
             required
@@ -14,17 +14,19 @@
             v-model="$v.titulo.$model"
             :class="{ error: $v.titulo.$error, success: !$v.titulo.$error }"
           />
-          <div v-if="$v.titulo.$error" class="text-danger">Deve conter ao menos 3 caracteres</div>
+          <div v-if="$v.titulo.$error" class="text-danger">
+            <small>Deve conter ao menos 3 caracteres</small>
+          </div>
         </label>
       </div>
       <div class="row justify-content-center">
         <label for="descricao" class="col-11 form-label">
-          <span class="fs-5">Descrição</span>
+          <span class="fs-6">Descrição</span>
           <textarea
-            class="form-control mt-1"
+            class="form-control form-control-sm mt-1"
             id="descricao"
             placeholder="Insira uma descrição para o seu anúncio"
-            rows="4"
+            rows="3"
             required
             minlength="10"
             v-model="$v.descricao.$model"
@@ -32,15 +34,15 @@
           >
           </textarea>
           <div v-if="$v.descricao.$error" class="text-danger">
-            Deve conter ao menos 10 caracteres
+            <small>Deve conter ao menos 10 caracteres</small>
           </div>
         </label>
       </div>
-      <div class="row py-4 justify-content-center">
+      <div class="row pt-2 justify-content-center">
         <label for="categoria" class="col-11 form-label">
-          <span class="fs-5">Categoria</span>
+          <span class="fs-6">Categoria</span>
           <select
-            class="form-select"
+            class="form-select form-select-sm"
             required
             aria-label="categoria"
             v-model="$v.categoria.$model"
@@ -59,13 +61,17 @@
             <option value="Produtos de Limpeza">Produtos de Limpeza</option>
             <option value="Roupas">Roupas</option>
           </select>
-          <div v-if="$v.categoria.$error" class="text-danger">Categoria requerida</div>
+          <div v-if="$v.categoria.$error" class="text-danger">
+            <small>Categoria requerida</small>
+          </div>
         </label>
       </div>
-      <div class="row py-4 justify-content-center">
+      <div class="row py-2 justify-content-center">
         <div class="col-11 d-flex justify-content-between">
-          <button @click="limpar" class="btn btn-secondary" type="button">Cancelar</button>
-          <button :disabled="$v.$invalid" type="submit" class="btn btn-primary">Anunciar</button>
+          <button @click="limpar" type="button" class="btn btn-sm btn-secondary">Cancelar</button>
+          <button :disabled="$v.$invalid" type="submit" class="btn btn-sm btn-primary">
+            Anunciar
+          </button>
         </div>
       </div>
     </form>
