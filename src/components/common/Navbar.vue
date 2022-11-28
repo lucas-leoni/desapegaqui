@@ -1,12 +1,12 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white px-5 py-1
-    shadow-lg justify-content-center">
-    <div class="col-2 logo d-flex justify-content-center">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white px-5 px-lg-0 px-xl-5 py-1
+    shadow-lg justify-content-evenly justify-content-xl-center">
+    <div class="col-6 col-lg-2 logo d-flex justify-content-lg-center">
       <router-link class="link-logo" to="/">
         <img src="../../assets/logo.svg" alt="logo" width="100px" />
       </router-link>
     </div>
-    <div class="col-10">
+    <div class="col-6 col-lg-10 d-flex d-lg-block justify-content-end flex-column">
       <button
         class="navbar-toggler"
         type="button"
@@ -20,12 +20,6 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul id="ul-principal" class="navbar-nav">
-          <!-- <li class="nav-item px-3 d-flex align-items-center fs-5">
-            <router-link to="/" class="nav-link">O que é?</router-link>
-          </li>
-          <li class="nav-item px-3 d-flex align-items-center fs-5">
-            <router-link to="/" class="nav-link">Como funciona? </router-link>
-          </li> -->
           <li class="nav-item px-2 d-flex align-items-center fs-6">
             <router-link to="/doar" class="nav-link">Doar</router-link>
           </li>
@@ -121,18 +115,6 @@ export default {
   border-bottom: 3px solid #E64242 !important;
 }
 
-@media (max-width: 1131px) {
-nav {
-  padding-left: 0rem !important;
-  padding-right: 0rem !important;
-  justify-content: space-evenly !important;
-}
-.col-2 {
-  flex: 0 0 auto;
-  width: 8.33333333%;
-}
-}
-
 @media (min-width: 992px) and (max-width: 998px) {
 .nav-item {
   padding: 0rem !important;
@@ -140,19 +122,6 @@ nav {
 }
 
 @media (max-width: 991px) {
-.col-2 {
-  flex: 0 0 auto;
-  width: 16.66666667%;
-}
-.col-10 {
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: column;
-}
-nav {
-  padding-left: 3rem !important;
-  padding-right: 3rem !important;
-}
 .navbar-toggler {
   display: flex;
   align-self: end;
