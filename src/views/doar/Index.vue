@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-5 px-0">
+  <div class="container py-4 px-5">
     <Titulo titulo="Cadastre sua doação" />
     <Form />
   </div>

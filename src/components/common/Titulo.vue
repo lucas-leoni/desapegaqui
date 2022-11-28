@@ -1,5 +1,5 @@
 <template>
-  <h1 class="m-0">{{titulo}}</h1>
+  <h2 class="m-0">{{titulo}}</h2>
 </template>
 
 <script>
