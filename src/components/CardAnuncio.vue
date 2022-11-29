@@ -5,17 +5,20 @@
       <h5 class="card-title">{{ announcement.title }}</h5>
       <p class="card-text">{{ announcement.description }}</p>
       <div class="col d-flex justify-content-between">
-        <router-link v-if="donation" :to="`/doacao/${announcement._id}`" class="btn btn-primary">
+        <router-link
+          v-if="donation"
+          :to="`/doacao/${announcement._id}`"
+          class="btn btn-sm btn-primary">
           <i class="bi bi-plus-circle me-1"></i> Detalhes
         </router-link>
         <router-link
           v-if="necessity"
           :to="`/necessidade/${announcement._id}`"
-          class="btn btn-primary"
+          class="btn btn-sm btn-primary"
         >
           <i class="bi bi-plus-circle me-1"></i> Detalhes
         </router-link>
-        <router-link to="" class="btn favorito">
+        <router-link to="" class="btn btn-sm favorito">
           <i class="bi bi-heart text-white"></i>
         </router-link>
       </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid px-0 py-4">
     <div class="row">
-      <div class="col-12 col-md-4 col-lg-5 d-flex align-items-center pe-0 pb-4 pb-md-0">
+      <div class="col-12 col-md-4 col-lg-5 d-flex align-items-center pb-4 pb-md-0">
         <div class="col">
           <form class="d-flex" role="search">
             <input
@@ -18,7 +18,7 @@
       </div>
       <div
         class="col-12 col-md-8 col-lg-7 d-flex align-items-center
-        justify-content-evenly pe-0 ps-1 ps-sm-3 ps-md-0">
+        justify-content-evenly ps-sm-3 ps-md-0">
         <div class="col-2 d-flex justify-content-start justify-content-md-center">
           <h6 class="mb-0">Categoria</h6>
         </div>
