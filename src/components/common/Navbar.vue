@@ -3,7 +3,7 @@
     shadow-lg justify-content-evenly justify-content-xl-center">
     <div class="col-6 col-lg-2 logo d-flex justify-content-lg-center">
       <router-link class="link-logo" to="/">
-        <img src="../../assets/logo.svg" alt="logo" width="100px" />
+        <img src="../../assets/logo.png" alt="logo" width="100px" />
       </router-link>
     </div>
     <div class="col-6 col-lg-10 d-flex d-lg-block justify-content-end flex-column">

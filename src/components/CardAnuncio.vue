@@ -1,6 +1,6 @@
 <template>
   <div class="card" style="width: 18rem">
-    <img src="../assets/logo-nova.png" class="card-img-top" alt="img-anuncio" />
+    <img src="../assets/logo.png" class="card-img-top p-5" alt="img-anuncio" />
     <div class="card-body">
       <h5 class="card-title">{{ announcement.title }}</h5>
       <p class="card-text">{{ announcement.description }}</p>
