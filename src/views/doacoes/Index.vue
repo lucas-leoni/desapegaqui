@@ -1,15 +1,17 @@
 <template>
-  <div class="container py-5 px-0">
-    <Titulo titulo="Doações" class="px-3" />
-    <Filtro class="px-3" />
-    <div class="container-fluid px-1">
-      <div class="row">
-        <div
-          class="col-3 d-flex justify-content-center mb-4"
-          v-for="announcement in announcements"
-          :key="announcement.id"
-        >
-          <CardAnuncio :announcement="announcement" />
+  <div class="container-fluid py-4 px-5">
+    <div class="container-fluid px-0 px-xl-5">
+      <Titulo titulo="Doações" />
+      <Filtro />
+      <div class="container-fluid px-1">
+        <div class="row">
+          <div
+            class="col-3 d-flex justify-content-center mb-4"
+            v-for="announcement in announcements"
+            :key="announcement.id"
+          >
+            <CardAnuncio :announcement="announcement" />
+          </div>
         </div>
       </div>
     </div>
