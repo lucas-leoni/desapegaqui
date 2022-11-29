@@ -137,6 +137,7 @@ export default {
   right: 4rem;
   margin: 0px;
   height: auto;
+  z-index: 1000;
 }
 .navbar-light .navbar-nav .nav-link {
   color: white;
