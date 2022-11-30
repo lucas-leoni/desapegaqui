@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-content-between">
-    <div class="col-8 px-5">
+    <div class="col-8 pe-5">
       <div class="card">
         <img src="../assets/logo.png" class="card-img-top p-5" alt="img-anuncio" />
         <div class="card-body">
@@ -13,34 +13,34 @@
       <div class="row p-5 bg-light">
         <div class="col">
           <div class="row py-2">
-            <div class="col d-flex justify-content-center">
-              <h5 class="m-0">Anunciante: {{ announcement.user.username }}</h5>
-            </div>
+            <h5 class="m-0">Anunciante: {{ announcement.user.username }}</h5>
           </div>
           <div class="row py-2">
-            <div class="col d-flex justify-content-center">
-              <h6 class="m-0">Data de publicação: {{ announcement.createdAt }}</h6>
-            </div>
+            <h6 class="m-0">Publicado em: {{ date() }}</h6>
           </div>
-          <div class="row py-2">
-            <div class="col d-flex justify-content-center">
-              <router-link to="" class="btn favorito mx-3">
+          <div class="row py-2 d-flex justify-content-evenly">
+            <div class="col-6">
+              <router-link to="" class="btn btn-sm favorito">
                 <span class="text-white">
                   <i class="bi bi-heart text-white"></i>
                   Favoritar
                 </span>
               </router-link>
-              <router-link to="" class="btn btn-success mx-3">
+            </div>
+            <div class="col-3">
+              <router-link :to="telephoneComplete" class="btn btn-sm btn-success">
                 <i class="bi bi-telephone-fill"></i>
               </router-link>
-              <router-link to="" class="btn btn-success mx-3">
+            </div>
+            <div class="col-3 d-flex justify-content-end">
+              <router-link to="" class="btn btn-sm btn-success">
                 <i class="bi bi-whatsapp"></i>
               </router-link>
             </div>
           </div>
           <div class="row py-2">
-            <div class="col d-flex justify-content-center">
-              <router-link to="" class="btn btn-primary">
+            <div class="col">
+              <router-link to="" class="btn btn-sm btn-primary">
                 <span>
                   <i class="bi bi-chat-fill"></i>
                   Entrar em contato por chat
@@ -62,6 +62,25 @@ export default {
     announcement: {
       type: Object,
       required: true,
+    },
+  },
+  /* computed: {
+    ddd() {
+      return `${this.announcement.user.contact.ddd}`;
+    },
+    telephone() {
+      return `${this.announcement.user.contact.telephone}`;
+    },
+    telephoneComplete() {
+      return `tel:+55${this.ddd}${this.telephone}`;
+    },
+  }, */
+  methods: {
+    date() {
+      const date = this.announcement.createdAt;
+      const dateFormated = date.split(' ');
+      const [zero] = dateFormated;
+      return zero;
     },
   },
 };
