@@ -14,14 +14,14 @@
           </p>
         </div>
         <div class="col-12 col-md-6 ps-lg-5 pt-5 pt-md-0">
-          <img src="../../assets/image-1.svg" alt="image-1" width="100%" height="100%" />
+          <img src="../../assets/imagem-1.svg" alt="image-1" width="100%" height="100%" />
         </div>
       </div>
     </div>
     <div class="container-fluid px-5 py-md-5">
       <div class="row px-lg-5 justify-content-around flex-column-reverse flex-md-row">
         <div class="col-12 col-md-6 pe-lg-5 py-5 py-md-0">
-          <img src="../../assets/image-2.svg" alt="image-2" width="100%" height="100%" />
+          <img src="../../assets/imagem-2.svg" alt="image-2" width="100%" height="100%" />
         </div>
         <div class="col-12 col-md-6 d-flex flex-column justify-content-center ps-lg-5">
           <div class="col pb-4">

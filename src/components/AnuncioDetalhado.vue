@@ -28,7 +28,7 @@
               </router-link>
             </div>
             <div class="col-3">
-              <router-link :to="telephoneComplete" class="btn btn-sm btn-success">
+              <router-link to="" class="btn btn-sm btn-success">
                 <i class="bi bi-telephone-fill"></i>
               </router-link>
             </div>
