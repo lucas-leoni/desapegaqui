@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar v-if="exibir()" />
+    <Navbar v-if="exibir()" :notLogged="notLogged()" @logout="notLogged()" />
     <router-view />
   </div>
 </template>
@@ -19,9 +19,13 @@ export default {
         return true;
       } return false;
     },
+    notLogged() {
+      return localStorage.getItem('userLogged') === null;
+    },
   },
   onMounted() {
     this.exibir();
+    this.notLogged();
   },
 };
 </script>

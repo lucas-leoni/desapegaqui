@@ -53,14 +53,14 @@
               aria-expanded="false">
                 Olá, {{username()}}
             </router-link>
-            <ul class="dropdown-menu dropdown-menu-dark border border-0 p-0">
+            <ul class="dropdown-menu dropdown-menu-dark border border-0 p-0 mt-lg-1">
               <li>
                 <router-link :to="`/perfil/${id()}`" class="nav-link sair text-white">
                   Perfil
                 </router-link>
               </li>
               <li>
-                <router-link to="/" class="nav-link sair text-white">
+                <router-link @click.native="logout()" to="/" class="nav-link sair text-white">
                   Sair
                 </router-link>
               </li>
@@ -75,10 +75,16 @@
 <script>
 export default {
   name: 'NavbarApp',
-  computed: {
-    show() {
-      return this.$route.name === 'home';
+  props: {
+    notLogged: {
+      type: Boolean,
+      required: true,
     },
+  },
+  data() {
+    return {
+      show: this.notLogged,
+    };
   },
   methods: {
     border() {
@@ -98,6 +104,10 @@ export default {
       value = value.id;
       return value;
     },
+    logout() {
+      localStorage.removeItem('userLogged');
+      this.show = this.$emit('logout');
+    },
   },
 };
 </script>
@@ -113,6 +123,10 @@ export default {
 
 #border {
   border-bottom: 3px solid #E64242 !important;
+}
+
+.dropdown-menu {
+  min-width: 6rem;
 }
 
 @media (min-width: 992px) and (max-width: 998px) {
