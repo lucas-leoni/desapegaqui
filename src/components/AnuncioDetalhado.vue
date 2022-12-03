@@ -1,8 +1,8 @@
 <template>
   <div class="row justify-content-between">
-    <div class="col-lg-8 pe-lg-5 px-md-0">
+    <div class="px-0 col-lg-8 pe-lg-5">
       <div class="card">
-        <img src="../assets/logo.png" class="card-img-top p-md-4 p-lg-5" alt="img-anuncio" />
+        <img src="../assets/logo.png" class="card-img-top p-5 p-md-4 p-lg-5" alt="img-anuncio" />
         <div class="card-body">
           <h6 class="card-title">{{ announcement.title }}</h6>
           <p class="card-text">{{ announcement.description }}</p>
@@ -10,8 +10,9 @@
       </div>
     </div>
     <div class="col-lg-4 mt-3 mt-lg-0">
-      <div class="row">
-        <div class="col-md-6 col-lg-12 flex-md-column flex-lg-row p-lg-4 p-xl-5 py-md-2 py-lg-4 py-xl-5 py-lg-0 bg-light">
+      <div class="row justify-content-center justify-content-md-start">
+        <div class="col-10 col-sm-7 col-md-6 col-lg-12 flex-column flex-lg-row
+        p-lg-4 py-2 py-lg-4 bg-light">
           <div class="col">
             <div class="row py-2">
               <h5 class="m-0 text-center">Anunciante: {{ announcement.user.username }}</h5>
