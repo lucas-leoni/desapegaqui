@@ -1,51 +1,47 @@
 <template>
   <div class="row justify-content-between">
-    <div class="col-8 pe-5">
+    <div class="col-lg-8 pe-lg-5 px-md-0">
       <div class="card">
-        <img src="../assets/logo.png" class="card-img-top p-5" alt="img-anuncio" />
+        <img src="../assets/logo.png" class="card-img-top p-md-4 p-lg-5" alt="img-anuncio" />
         <div class="card-body">
-          <h5 class="card-title">{{ announcement.title }}</h5>
+          <h6 class="card-title">{{ announcement.title }}</h6>
           <p class="card-text">{{ announcement.description }}</p>
         </div>
       </div>
     </div>
-    <div class="col-4">
-      <div class="row p-5 bg-light">
-        <div class="col">
-          <div class="row py-2">
-            <h5 class="m-0">Anunciante: {{ announcement.user.username }}</h5>
-          </div>
-          <div class="row py-2">
-            <h6 class="m-0">Publicado em: {{ date() }}</h6>
-          </div>
-          <div class="row py-2 d-flex justify-content-evenly">
-            <div class="col-6">
+    <div class="col-lg-4 mt-3 mt-lg-0">
+      <div class="row">
+        <div class="col-md-6 col-lg-12 flex-md-column flex-lg-row p-lg-4 p-xl-5 py-md-2 py-lg-4 py-xl-5 py-lg-0 bg-light">
+          <div class="col">
+            <div class="row py-2">
+              <h5 class="m-0 text-center">Anunciante: {{ announcement.user.username }}</h5>
+            </div>
+            <div class="row py-2">
+              <h6 class="m-0 text-center">Publicado em: {{ date() }}</h6>
+            </div>
+            <div class="col py-2 d-flex justify-content-evenly">
               <router-link to="" class="btn btn-sm favorito">
                 <span class="text-white">
                   <i class="bi bi-heart text-white"></i>
                   Favoritar
                 </span>
               </router-link>
+              <a :href="`tel:+${telephoneComplete}`" class="btn btn-sm btn-success">
+                <i class="bi bi-telephone-fill"><span class="d-none">tel</span></i>
+              </a>
+              <a :href="whatsapp" target="_blank" class="btn btn-sm btn-success">
+                <i class="bi bi-whatsapp"><span class="d-none">whatsapp</span></i>
+              </a>
             </div>
-            <div class="col-3">
-              <router-link to="" class="btn btn-sm btn-success">
-                <i class="bi bi-telephone-fill"></i>
-              </router-link>
-            </div>
-            <div class="col-3 d-flex justify-content-end">
-              <router-link to="" class="btn btn-sm btn-success">
-                <i class="bi bi-whatsapp"></i>
-              </router-link>
-            </div>
-          </div>
-          <div class="row py-2">
-            <div class="col">
-              <router-link to="" class="btn btn-sm btn-primary">
-                <span>
-                  <i class="bi bi-chat-fill"></i>
-                  Entrar em contato por chat
-                </span>
-              </router-link>
+            <div class="row py-2">
+              <div class="col d-flex justify-content-center">
+                <router-link to="" class="btn btn-sm btn-primary">
+                  <span>
+                    <i class="bi bi-chat-fill"></i>
+                    Entrar em contato por chat
+                  </span>
+                </router-link>
+              </div>
             </div>
           </div>
         </div>
@@ -64,7 +60,7 @@ export default {
       required: true,
     },
   },
-  /* computed: {
+  computed: {
     ddd() {
       return `${this.announcement.user.contact.ddd}`;
     },
@@ -72,9 +68,12 @@ export default {
       return `${this.announcement.user.contact.telephone}`;
     },
     telephoneComplete() {
-      return `tel:+55${this.ddd}${this.telephone}`;
+      return `55${this.ddd}${this.telephone}`;
     },
-  }, */
+    whatsapp() {
+      return `https://api.whatsapp.com/send?phone=${this.telephoneComplete}`;
+    },
+  },
   methods: {
     date() {
       const date = this.announcement.createdAt;

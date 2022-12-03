@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-5 px-5">
+  <div class="container pb-md-0 pb-lg-5 py-5 px-5">
     <AnuncioDetalhado :announcement="donation" />
   </div>
 </template>
