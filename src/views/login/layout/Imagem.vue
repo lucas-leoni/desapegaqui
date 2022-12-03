@@ -1,5 +1,7 @@
 <template>
-  <div class="col"></div>
+  <div class="col d-none d-md-block">
+    <img class="w-100 h-100 p-5" src="../../../assets/login.svg" alt="img-login">
+  </div>
 </template>
 
 <script>
@@ -7,12 +9,3 @@ export default {
   name: 'ImageLogin',
 };
 </script>
-
-<style scoped>
-.col {
-  background-image: url(../../../assets/login.jpg);
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-}
-</style>

@@ -1,20 +1,18 @@
 <template>
-  <div class="col">
-    <div class="row py-1 justify-content-center">
-      <div class="col-6 d-flex justify-content-center">
+  <div class="col d-flex align-items-center justify-content-center">
+    <form @submit.prevent="save()">
+      <div class="col py-1 d-flex justify-content-center">
         <Titulo titulo="Criar conta" />
       </div>
-    </div>
-    <form @submit.prevent="save()">
-      <div class="row py-1 justify-content-center">
-        <div class="col-6">
+      <div class="col py-1 d-flex justify-content-center">
+        <div class="col-12">
           <div class="row justify-content-center">
             <label for="username" class="form-label row">
-              <span class="fs-5">Nome de usuário</span>
+              <span class="fs-6">Nome de usuário</span>
               <div class="col-11">
                 <input
                   type="text"
-                  class="form-control mt-1"
+                  class="form-control form-control-sm mt-1"
                   id="username"
                   placeholder="Insira um nome de usuário"
                   required
@@ -23,45 +21,47 @@
                   :class="{ error: $v.username.$error, success: !$v.username.$error }"
                 />
                 <div v-if="$v.username.$error" class="text-danger">
-                  Deve conter ao menos 3 caracteres
+                  <small>Deve conter ao menos 3 caracteres</small>
                 </div>
               </div>
             </label>
           </div>
         </div>
       </div>
-      <div class="row py-1 justify-content-center">
-        <div class="col-6">
+      <div class="col py-1 d-flex justify-content-center">
+        <div class="col-12">
           <div class="row justify-content-center">
             <label for="email" class="form-label row">
-              <span class="fs-5">Email</span>
+              <span class="fs-6">Email</span>
               <div class="col-11">
                 <input
                   type="email"
-                  class="form-control mt-1"
+                  class="form-control form-control-sm mt-1"
                   id="email"
                   placeholder="Exemplo@email.com"
                   required
                   v-model="$v.email.$model"
                   :class="{ error: $v.email.$error, success: !$v.email.$error }"
                 />
-                <div v-if="$v.email.$error" class="text-danger">Este email é inválido</div>
+                <div v-if="$v.email.$error" class="text-danger">
+                  <small>Este email é inválido</small>
+                </div>
               </div>
             </label>
           </div>
         </div>
       </div>
-      <div class="row py-1 justify-content-center">
-        <div class="col-6">
+      <div class="col py-1 d-flex justify-content-center">
+        <div class="col-12">
           <div class="row justify-content-center">
             <label for="password" class="form-label row">
-              <span class="fs-5">Senha</span>
-              <div class="col-10">
+              <span class="fs-6">Senha</span>
+              <div class="col-11">
                 <input
                   :type="inputType"
                   minlength="8"
                   maxlength="16"
-                  class="senha form-control mt-1"
+                  class="senha form-control form-control-sm mt-1"
                   id="password"
                   placeholder="Insira uma senha"
                   required
@@ -69,7 +69,7 @@
                   :class="{ error: $v.password.$error, success: !$v.password.$error }"
                 />
                 <div v-if="$v.password.$error" class="text-danger">
-                  Deve conter de 8 a 16 caracteres
+                  <small>Deve conter de 8 a 16 caracteres</small>
                 </div>
               </div>
               <div class="col-1 d-flex align-items-start px-0 py-1">
@@ -82,17 +82,17 @@
           </div>
         </div>
       </div>
-      <div class="row py-1 justify-content-center">
-        <div class="col-6">
+      <div class="col py-1 d-flex justify-content-center">
+        <div class="col-12">
           <div class="row justify-content-center">
             <label for="password-confirm" class="form-label row">
-              <span class="fs-5">Confimar senha</span>
-              <div class="col-10">
+              <span class="fs-6">Confimar senha</span>
+              <div class="col-11">
                 <input
                   :type="inputType"
                   minlength="8"
                   maxlength="16"
-                  class="confirmar-senha form-control mt-1"
+                  class="confirmar-senha form-control form-control-sm mt-1"
                   id="password-confirm"
                   placeholder="Confirme a senha"
                   required
@@ -103,7 +103,7 @@
                   }"
                 />
                 <div v-if="$v.password_confirm.$error" class="text-danger">
-                  As senhas não coincidem
+                  <small>As senhas não coincidem</small>
                 </div>
               </div>
               <div class="col-1 d-flex align-items-start px-0 py-1">
@@ -116,15 +116,15 @@
           </div>
         </div>
       </div>
-      <div class="row py-1 justify-content-center">
-        <div class="col-6 d-flex justify-content-center">
-          <button :disabled="$v.$invalid" type="submit" class="btn btn-primary">
+      <div class="col py-1 d-flex justify-content-center">
+        <div class="col-12 d-flex justify-content-center">
+          <button :disabled="$v.$invalid" type="submit" class="btn btn-sm btn-primary">
             Criar Conta
           </button>
         </div>
       </div>
-      <div class="row py-1 justify-content-center">
-        <div class="col-6 d-flex justify-content-center">
+      <div class="col py-1 d-flex justify-content-center">
+        <div class="col-12 d-flex justify-content-center">
           <p>
             Já possui uma conta?
             <router-link class="text-decoration-none" to="/login"> Fazer login </router-link>

@@ -1,5 +1,7 @@
 <template>
-  <div class="col"></div>
+  <div class="col d-none d-md-block">
+    <img class="w-100 h-100 p-5" src="../../../assets/criar-conta.svg" alt="img-criar-conta">
+  </div>
 </template>
 
 <script>
@@ -7,13 +9,3 @@ export default {
   name: 'ImageCriarConta',
 };
 </script>
-
-<style scoped>
-.col {
-  background-image: url(../../../assets/criar-conta.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-}
-</style>

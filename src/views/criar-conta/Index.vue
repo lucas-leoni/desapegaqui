@@ -1,7 +1,9 @@
 <template>
-  <div class="container-fluid row align-items-center p-0">
-    <Imagem />
-    <Form />
+  <div class="container-fluid vh-100 d-flex align-items-center justify-content-center">
+    <div class="row">
+      <Imagem />
+      <Form />
+    </div>
   </div>
 </template>
 
