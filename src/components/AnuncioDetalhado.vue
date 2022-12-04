@@ -36,7 +36,7 @@
             </div>
             <div class="row py-2">
               <div class="col d-flex justify-content-center">
-                <router-link to="" class="btn btn-sm btn-primary">
+                <router-link @click.native="donate" to="" class="btn btn-sm btn-primary">
                   <span>
                     <i class="bi bi-chat-fill"></i>
                     Entrar em contato por chat
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import api from '@/api';
 
 export default {
   name: 'AnuncioDetalhado',
@@ -60,6 +61,11 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      beneficiary: '',
+    };
   },
   computed: {
     ddd() {
@@ -74,6 +80,14 @@ export default {
     whatsapp() {
       return `https://api.whatsapp.com/send?phone=${this.telephoneComplete}`;
     },
+    idAnnouncement() {
+      const { _id } = this.announcement;
+      return _id;
+    },
+    idDonor() {
+      const { _id } = this.announcement.user;
+      return _id;
+    },
   },
   methods: {
     date() {
@@ -82,6 +96,31 @@ export default {
       const [zero] = dateFormated;
       return zero;
     },
+    getUserLogged() {
+      let userStorage = localStorage.getItem('userLogged');
+      userStorage = JSON.parse(userStorage);
+      this.beneficiary = userStorage.id;
+    },
+    donate() {
+      const data = {
+        announcement: this.idAnnouncement,
+        donor: this.idDonor,
+        beneficiary: this.beneficiary,
+      };
+      api
+        .post('/donation', data)
+        .then(() => {
+          console.log('Successfully donated');
+          alert('Doação realizada!');
+          this.$router.push({ path: '/doacoes' });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+  mounted() {
+    this.getUserLogged();
   },
 };
 </script>
