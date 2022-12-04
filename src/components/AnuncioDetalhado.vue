@@ -150,7 +150,7 @@ export default {
         .post('/donation', data)
         .then(() => {
           const data2 = {
-            status: 'donated',
+            status: 'received',
           };
           api
             .put(`/announcement/${id}`, data2)
