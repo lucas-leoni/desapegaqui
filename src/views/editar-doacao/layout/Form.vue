@@ -108,6 +108,7 @@ export default {
       descricao: '',
       categoria: '',
       type: 'donation',
+      status: 'active',
       user: '',
     };
   },
@@ -136,6 +137,7 @@ export default {
         description: this.descricao,
         category: this.categoria,
         type: this.type,
+        status: this.status,
         user: this.user,
       };
       const { id } = this.$route.params;
