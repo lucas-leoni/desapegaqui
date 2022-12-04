@@ -1,14 +1,14 @@
 <template>
-  <div class="container bg-light rounded shadow-lg mt-3 py-3">
+  <div class="container bg-light rounded shadow-lg p-3 mt-sm-3 px-sm-0 py-sm-2">
     <form @submit.prevent="update()">
-      <div class="row py-3 justify-content-evenly">
-        <div class="col-5">
+      <div class="flex-column flex-sm-row row py-sm-2 mx-sm-1 mx-lg-0 justify-content-evenly">
+        <div class="col-12 col-sm-5 px-sm-1">
           <div class="row justify-content-center">
             <label for="username" class="form-label">
-              <span class="fs-5">Nome de Usuário</span>
+              <span class="fs-6">Nome de Usuário</span>
               <input
                 type="text"
-                class="form-control mt-1"
+                class="form-control form-control-sm mt-1"
                 id="username"
                 placeholder="Insira um nome de usuário"
                 required
@@ -17,40 +17,42 @@
                 :class="{ error: $v.username.$error, success: !$v.username.$error }"
               />
               <div v-if="$v.username.$error" class="text-danger">
-                Deve conter ao menos 3 caracteres
+                <small>Deve conter ao menos 3 caracteres</small>
               </div>
             </label>
           </div>
         </div>
-        <div class="col-5">
+        <div class="col-12 col-sm-5 px-sm-1">
           <div class="row justify-content-center">
             <label for="email" class="form-label">
-              <span class="fs-5">Email</span>
+              <span class="fs-6">Email</span>
               <input
                 type="email"
-                class="form-control mt-1"
+                class="form-control form-control-sm mt-1"
                 id="email"
                 placeholder="Exemplo@email.com"
                 required
                 v-model="$v.email.$model"
                 :class="{ error: $v.email.$error, success: !$v.email.$error }"
               />
-              <div v-if="$v.email.$error" class="text-danger">Este email é inválido</div>
+              <div v-if="$v.email.$error" class="text-danger">
+                <small>Este email é inválido</small>
+              </div>
             </label>
           </div>
         </div>
       </div>
-      <div class="row py-3 justify-content-evenly">
-        <div class="col-5">
+      <div class="flex-column flex-sm-row row py-sm-2 mx-sm-1 mx-lg-0 justify-content-evenly">
+        <div class="col-12 col-sm-5 px-sm-1">
           <div class="row justify-content-center">
             <label for="password" class="form-label row">
-              <span class="fs-5 p-0">Senha</span>
-              <div class="col-11 p-0">
+              <span class="fs-6 p-0">Senha</span>
+              <div class="col-10 col-lg-11 p-0">
                 <input
                   :type="inputType"
                   minlength="8"
                   maxlength="16"
-                  class="form-control mt-1"
+                  class="form-control form-control-sm mt-1"
                   id="password"
                   placeholder="Insira uma senha"
                   required
@@ -58,10 +60,10 @@
                   :class="{ error: $v.password.$error, success: !$v.password.$error }"
                 />
                 <div v-if="$v.password.$error" class="text-danger">
-                  Deve conter de 8 a 16 caracteres
+                  <small>Deve conter de 8 a 16 caracteres</small>
                 </div>
               </div>
-              <div class="col-1 d-flex justify-content-center align-items-start px-0 py-1">
+              <div class="col-2 col-lg-1 d-flex justify-content-center align-items-start px-0 py-1">
                 <button @click="togglePassword" type="button" class="btn btn-default p-0">
                   <i v-if="isPassword" class="bi bi-eye-fill fs-4"></i>
                   <i v-else class="bi bi-eye-slash-fill fs-4"></i>
@@ -70,16 +72,16 @@
             </label>
           </div>
         </div>
-        <div class="col-5">
+        <div class="col-12 col-sm-5 px-sm-1">
           <div class="row justify-content-center">
             <label for="password-confirm" class="form-label row">
-              <span class="fs-5 p-0">Confirmar Senha</span>
-              <div class="col-11 p-0">
+              <span class="fs-6 p-0">Confirmar Senha</span>
+              <div class="col-10 col-lg-11 p-0">
                 <input
                   :type="inputType"
                   minlength="8"
                   maxlength="16"
-                  class="form-control mt-1"
+                  class="form-control form-control-sm mt-1"
                   id="password-confirm"
                   placeholder="Confirme a senha"
                   required
@@ -90,10 +92,10 @@
                   }"
                 />
                 <div v-if="$v.password_confirm.$error" class="text-danger">
-                  As senhas não coincidem
+                  <small>As senhas não coincidem</small>
                 </div>
               </div>
-              <div class="col-1 d-flex justify-content-center align-items-start px-0 py-1">
+              <div class="col-2 col-lg-1 d-flex justify-content-center align-items-start px-0 py-1">
                 <button @click="togglePassword" type="button" class="btn btn-default p-0">
                   <i v-if="isPassword" class="bi bi-eye-fill fs-4"></i>
                   <i v-else class="bi bi-eye-slash-fill fs-4"></i>
@@ -103,33 +105,35 @@
           </div>
         </div>
       </div>
-      <div class="row py-3 justify-content-evenly">
-        <div class="col-3 p-0">
+      <div class="flex-column flex-sm-row row py-sm-2 mx-sm-1 mx-lg-0 justify-content-evenly">
+        <div class="col-12 col-sm-3 p-sm-0">
           <div class="row justify-content-center">
             <label for="cep" class="form-label">
-              <span class="fs-5">CEP</span>
+              <span class="fs-6">CEP</span>
               <input
                 @blur="getAddress()"
                 type="number"
-                class="form-control mt-1"
+                class="form-control form-control-sm mt-1"
                 id="cep"
                 placeholder="Insira seu CEP"
                 required
                 v-model="$v.cep.$model"
                 :class="{ error: $v.cep.$error, success: !$v.cep.$error }"
               />
-              <div v-if="$v.cep.$error" class="text-danger">Deve conter 8 caracteres</div>
+              <div v-if="$v.cep.$error" class="text-danger">
+                <small>Deve conter 8 caracteres</small>
+              </div>
             </label>
           </div>
         </div>
-        <div class="col-3 p-0">
+        <div class="col-12 col-sm-4 col-md-3 p-sm-0">
           <div class="row justify-content-center">
             <label for="city" class="form-label">
-              <span class="fs-5">Cidade</span>
+              <span class="fs-6">Cidade</span>
               <input
                 disabled
                 type="text"
-                class="form-control mt-1"
+                class="form-control form-control-sm mt-1"
                 id="city"
                 placeholder="Insira uma cidade"
                 required
@@ -137,18 +141,20 @@
                 v-model="$v.city.$model"
                 :class="{ error: $v.city.$error, success: !$v.city.$error }"
               />
-              <div v-if="$v.city.$error" class="text-danger">Deve conter ao menos 3 caracteres</div>
+              <div v-if="$v.city.$error" class="text-danger">
+                <small>Deve conter ao menos 3 caracteres</small>
+              </div>
             </label>
           </div>
         </div>
-        <div class="col-3 p-0">
+        <div class="col-12 col-sm-2 col-md-3 p-sm-0">
           <div class="row justify-content-center">
             <label for="state" class="form-label">
-              <span class="fs-5">Estado</span>
+              <span class="fs-6">Estado</span>
               <input
                 disabled
                 type="text"
-                class="form-control mt-1"
+                class="form-control form-control-sm mt-1"
                 id="state"
                 placeholder="Insira um estado"
                 required
@@ -157,20 +163,22 @@
                 v-model="$v.state.$model"
                 :class="{ error: $v.state.$error, success: !$v.state.$error }"
               />
-              <div v-if="$v.state.$error" class="text-danger">Deve conter 2 caracteres</div>
+              <div v-if="$v.state.$error" class="text-danger">
+                <small>Deve conter 2 caracteres</small>
+              </div>
             </label>
           </div>
         </div>
       </div>
-      <div class="row py-3 justify-content-evenly">
-        <div class="col-4 p-0">
+      <div class="flex-column flex-sm-row row py-sm-2 mx-sm-1 mx-lg-0 justify-content-evenly">
+        <div class="col-12 col-sm-4 p-sm-0">
           <div class="row justify-content-center">
             <label for="street" class="form-label">
-              <span class="fs-5">Rua</span>
+              <span class="fs-6">Rua</span>
               <input
                 disabled
                 type="text"
-                class="form-control mt-1"
+                class="form-control form-control-sm mt-1"
                 id="street"
                 placeholder="Insira uma rua"
                 required
@@ -179,18 +187,18 @@
                 :class="{ error: $v.street.$error, success: !$v.street.$error }"
               />
               <div v-if="$v.street.$error" class="text-danger">
-                Deve conter ao menos 3 caracteres
+                <small>Deve conter ao menos 3 caracteres</small>
               </div>
             </label>
           </div>
         </div>
-        <div class="col-2 p-0">
+        <div class="col-12 col-sm-2 p-sm-0">
           <div class="row justify-content-center">
             <label for="number" class="form-label">
-              <span class="fs-5">Número</span>
+              <span class="fs-6">Número</span>
               <input
                 type="number"
-                class="form-control mt-1"
+                class="form-control form-control-sm mt-1"
                 id="number"
                 placeholder="Insira um número"
                 required
@@ -199,19 +207,19 @@
                 :class="{ error: $v.number.$error, success: !$v.number.$error }"
               />
               <div v-if="$v.number.$error" class="text-danger">
-                Deve conter ao menos 1 caractere
+                <small>Deve conter ao menos 1 caractere</small>
               </div>
             </label>
           </div>
         </div>
-        <div class="col-3 p-0">
+        <div class="col-12 col-sm-3 p-sm-0">
           <div class="row justify-content-center">
             <label for="neighborhood" class="form-label">
-              <span class="fs-5">Bairro</span>
+              <span class="fs-6">Bairro</span>
               <input
                 disabled
                 type="text"
-                class="form-control mt-1"
+                class="form-control form-control-sm mt-1"
                 id="neighborhood"
                 placeholder="Insira um bairro"
                 required
@@ -220,20 +228,20 @@
                 :class="{ error: $v.neighborhood.$error, success: !$v.neighborhood.$error }"
               />
               <div v-if="$v.neighborhood.$error" class="text-danger">
-                Deve conter ao menos 3 caracteres
+                <small>Deve conter ao menos 3 caracteres</small>
               </div>
             </label>
           </div>
         </div>
       </div>
-      <div class="row py-3 justify-content-evenly">
-        <div class="col-4 p-0">
+      <div class="flex-column flex-sm-row row py-sm-2 mx-sm-1 mx-lg-0 justify-content-evenly">
+        <div class="col-12 col-sm-4 p-sm-0">
           <div class="row justify-content-center">
             <label for="complement" class="form-label">
-              <span class="fs-5">Complemento</span>
+              <span class="fs-6">Complemento</span>
               <input
                 type="text"
-                class="form-control mt-1"
+                class="form-control form-control-sm mt-1"
                 id="complement"
                 placeholder="Insira um complemento"
                 v-model="complement"
@@ -241,13 +249,13 @@
             </label>
           </div>
         </div>
-        <div class="col-2 p-0">
+        <div class="col-12 col-sm-2 p-sm-0">
           <div class="row justify-content-center">
             <label for="ddd" class="form-label">
-              <span class="fs-5">DDD</span>
+              <span class="fs-6">DDD</span>
               <input
                 type="number"
-                class="form-control mt-1"
+                class="form-control form-control-sm mt-1"
                 id="ddd"
                 placeholder="Insira um DDD"
                 required
@@ -256,17 +264,20 @@
                 v-model="$v.ddd.$model"
                 :class="{ error: $v.ddd.$error, success: !$v.ddd.$error }"
               />
-              <div v-if="$v.ddd.$error" class="text-danger">Deve conter 2 caracteres</div>
+              <div v-if="$v.ddd.$error" class="text-danger">
+                <small>Deve conter 2 caracteres</small>
+              </div>
             </label>
           </div>
         </div>
-        <div class="col-3 p-0">
+        <div class="col-12 col-sm-3 p-sm-0">
           <div class="row justify-content-center">
             <label for="telephone" class="form-label">
-              <span class="fs-5">Telefone ou Celular</span>
+              <span class="fs-6 d-block d-sm-none d-md-block">Telefone ou Celular</span>
+              <span class="fs-6 d-none d-sm-block d-md-none">Telefone</span>
               <input
                 type="number"
-                class="form-control mt-1"
+                class="form-control form-control-sm mt-1"
                 id="telephone"
                 placeholder="Insira um telefone ou celular"
                 required
@@ -276,18 +287,20 @@
                 :class="{ error: $v.telephone.$error, success: !$v.telephone.$error }"
               />
               <div v-if="$v.telephone.$error" class="text-danger">
-                Deve conter ao menos 8 caracteres
+                <small>Deve conter ao menos 8 caracteres</small>
               </div>
             </label>
           </div>
         </div>
       </div>
-      <div class="row py-3 justify-content-evenly">
-        <div class="col-5">
-          <button @click="limpar" class="btn btn-secondary" type="button">Limpar</button>
+      <div class="row py-sm-2 mx-sm-1 mx-lg-0 justify-content-evenly">
+        <div class="col-6 col-sm-5 px-sm-1">
+          <button @click="limpar" type="button" class="btn btn-sm btn-secondary">Limpar</button>
         </div>
-        <div class="col-5 d-flex justify-content-end">
-          <button :disabled="$v.$invalid" type="submit" class="btn btn-primary">Atualizar</button>
+        <div class="col-6 col-sm-5 d-flex justify-content-end px-sm-1">
+          <button :disabled="$v.$invalid" type="submit" class="btn btn-sm btn-primary">
+            Atualizar
+          </button>
         </div>
       </div>
     </form>

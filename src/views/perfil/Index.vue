@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-5 px-0">
+  <div class="container px-5 py-4">
     <Form />
   </div>
 </template>
