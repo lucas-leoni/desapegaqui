@@ -36,7 +36,21 @@
             </div>
             <div class="row py-2">
               <div class="col d-flex justify-content-center">
-                <router-link @click.native="donate" to="" class="btn btn-sm btn-primary">
+                <router-link
+                  v-if="donation"
+                  @click.native="want"
+                  to=""
+                  class="btn btn-sm btn-primary">
+                  <span>
+                    <i class="bi bi-chat-fill"></i>
+                    Entrar em contato por chat
+                  </span>
+                </router-link>
+                <router-link
+                  v-if="necessity"
+                  @click.native="donate"
+                  to=""
+                  class="btn btn-sm btn-primary">
                   <span>
                     <i class="bi bi-chat-fill"></i>
                     Entrar em contato por chat
@@ -62,11 +76,6 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      beneficiary: '',
-    };
-  },
   computed: {
     ddd() {
       return `${this.announcement.user.contact.ddd}`;
@@ -80,9 +89,11 @@ export default {
     whatsapp() {
       return `https://api.whatsapp.com/send?phone=${this.telephoneComplete}`;
     },
-    idDonor() {
-      const { _id } = this.announcement.user;
-      return _id;
+    donation() {
+      return this.announcement.type === 'donation';
+    },
+    necessity() {
+      return this.announcement.type === 'necessity';
     },
   },
   methods: {
@@ -92,17 +103,48 @@ export default {
       const [zero] = dateFormated;
       return zero;
     },
-    getUserLogged() {
+    want() {
+      const { id } = this.$route.params;
+      const { _id } = this.announcement.user;
       let userStorage = localStorage.getItem('userLogged');
       userStorage = JSON.parse(userStorage);
-      this.beneficiary = userStorage.id;
+      const beneficiary = userStorage.id;
+      const data = {
+        announcement: id,
+        donor: _id,
+        beneficiary,
+      };
+      api
+        .post('/donation', data)
+        .then(() => {
+          const data2 = {
+            status: 'donated',
+          };
+          api
+            .put(`/announcement/${id}`, data2)
+            .then(() => {
+              console.log('Successfully received');
+              alert('Doação recebida!');
+              this.$router.push({ path: '/doacoes' });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     donate() {
       const { id } = this.$route.params;
+      const { _id } = this.announcement.user;
+      let userStorage = localStorage.getItem('userLogged');
+      userStorage = JSON.parse(userStorage);
+      const donor = userStorage.id;
       const data = {
         announcement: id,
-        donor: this.idDonor,
-        beneficiary: this.beneficiary,
+        donor,
+        beneficiary: _id,
       };
       api
         .post('/donation', data)
@@ -115,7 +157,7 @@ export default {
             .then(() => {
               console.log('Successfully donated');
               alert('Doação realizada!');
-              this.$router.push({ path: '/doacoes' });
+              this.$router.push({ path: '/necessidades' });
             })
             .catch((error) => {
               console.log(error);
@@ -125,9 +167,6 @@ export default {
           console.log(error);
         });
     },
-  },
-  mounted() {
-    this.getUserLogged();
   },
 };
 </script>
