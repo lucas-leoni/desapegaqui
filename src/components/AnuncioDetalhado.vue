@@ -80,10 +80,6 @@ export default {
     whatsapp() {
       return `https://api.whatsapp.com/send?phone=${this.telephoneComplete}`;
     },
-    idAnnouncement() {
-      const { _id } = this.announcement;
-      return _id;
-    },
     idDonor() {
       const { _id } = this.announcement.user;
       return _id;
@@ -102,17 +98,28 @@ export default {
       this.beneficiary = userStorage.id;
     },
     donate() {
+      const { id } = this.$route.params;
       const data = {
-        announcement: this.idAnnouncement,
+        announcement: id,
         donor: this.idDonor,
         beneficiary: this.beneficiary,
       };
       api
         .post('/donation', data)
         .then(() => {
-          console.log('Successfully donated');
-          alert('Doação realizada!');
-          this.$router.push({ path: '/doacoes' });
+          const data2 = {
+            status: 'donated',
+          };
+          api
+            .put(`/announcement/${id}`, data2)
+            .then(() => {
+              console.log('Successfully donated');
+              alert('Doação realizada!');
+              this.$router.push({ path: '/doacoes' });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         })
         .catch((error) => {
           console.log(error);
