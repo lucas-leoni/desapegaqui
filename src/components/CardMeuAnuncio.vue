@@ -34,6 +34,8 @@
             v-if="donation"
             :to="`/editar-doacao/${announcement._id}`"
             class="btn btn-sm btn-warning"
+            tag="button"
+            :disabled="disable"
           >
             <i class="bi bi-pencil-fill"></i>
           </router-link>
@@ -41,6 +43,8 @@
             v-if="necessity"
             :to="`/editar-necessidade/${announcement._id}`"
             class="btn btn-sm btn-warning"
+            tag="button"
+            :disabled="disable"
           >
             <i class="bi bi-pencil-fill"></i>
           </router-link>
@@ -80,6 +84,9 @@ export default {
     },
     received() {
       return this.announcement.status === 'received';
+    },
+    disable() {
+      return this.announcement.status !== 'active';
     },
   },
   methods: {
