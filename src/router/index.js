@@ -15,6 +15,8 @@ import MinhasNecessidadesView from '@/views/minhas-necessidades/Index.vue';
 import FavoritosView from '@/views/favoritos/Index.vue';
 import EditarDoacaoView from '@/views/editar-doacao/Index.vue';
 import EditarNecessidadeView from '@/views/editar-necessidade/Index.vue';
+import DoacoesRealizadasView from '@/views/doacoes-realizadas/Index.vue';
+import DetalhesDoacaoRealizada from '@/views/detalhes-doacao-realizada/Index.vue';
 
 Vue.use(VueRouter);
 
@@ -93,6 +95,16 @@ const routes = [
     path: '/editar-necessidade/:id',
     name: 'editarNecessidade',
     component: EditarNecessidadeView,
+  },
+  {
+    path: '/doacoes-realizadas',
+    name: 'doacoesRealizadas',
+    component: DoacoesRealizadasView,
+  },
+  {
+    path: '/doacao-realizada/:id',
+    name: 'detalhesDoacaoRealizada',
+    component: DetalhesDoacaoRealizada,
   },
 ];
 

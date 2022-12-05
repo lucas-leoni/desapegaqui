@@ -125,7 +125,7 @@ export default {
             .then(() => {
               console.log('Successfully received');
               alert('Doação recebida!');
-              this.$router.push({ path: '/doacoes' });
+              this.$router.push({ path: '/doacoes-realizadas' });
             })
             .catch((error) => {
               console.log(error);
@@ -157,7 +157,7 @@ export default {
             .then(() => {
               console.log('Successfully donated');
               alert('Doação realizada!');
-              this.$router.push({ path: '/necessidades' });
+              this.$router.push({ path: '/doacoes-realizadas' });
             })
             .catch((error) => {
               console.log(error);
