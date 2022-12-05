@@ -20,26 +20,29 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul id="ul-principal" class="navbar-nav">
-          <li class="nav-item px-2 d-flex align-items-center fs-6">
+          <li class="nav-item px-2 d-flex align-items-center">
             <router-link to="/doar" class="nav-link">Doar</router-link>
           </li>
-          <li class="nav-item px-2 d-flex align-items-center fs-6">
+          <li class="nav-item px-2 d-flex align-items-center">
             <router-link to="/cadastrar-necessidade" class="nav-link">
               Cadastrar necessidade
             </router-link>
           </li>
-          <li class="nav-item px-2 d-flex align-items-center fs-6">
-            <router-link to="/doacoes" class="nav-link">Consultar doações</router-link>
+          <li class="nav-item px-2 d-flex align-items-center">
+            <router-link to="/doacoes" class="nav-link">Doações</router-link>
           </li>
-          <li class="nav-item px-2 d-flex align-items-center fs-6">
-            <router-link to="/necessidades" class="nav-link">Consultar necessidades</router-link>
+          <li class="nav-item px-2 d-flex align-items-center">
+            <router-link to="/necessidades" class="nav-link">Necessidades</router-link>
           </li>
-          <li v-if="show" class="nav-item px-2 d-flex align-items-center fs-6">
+          <li class="nav-item px-2 d-flex align-items-center">
+            <router-link to="/doacoes-realizadas" class="nav-link">Doações realizadas</router-link>
+          </li>
+          <li v-if="show" class="nav-item px-2 d-flex align-items-center">
             <router-link to="/criar-conta" class="nav-link criar-conta">
               <button type="button" class="btn btn-sm btn-outline-primary">Criar Conta</button>
             </router-link>
           </li>
-          <li v-if="show" class="nav-item px-2 d-flex align-items-center fs-6">
+          <li v-if="show" class="nav-item px-2 d-flex align-items-center">
             <router-link to="/login" class="nav-link login">
               <button id="login" type="button" class="btn btn-sm btn-primary">Login</button>
             </router-link>
@@ -113,6 +116,10 @@ export default {
 </script>
 
 <style scoped>
+.nav-link {
+  font-size: 0.875rem;
+}
+
 .nav-link:hover:not(.criar-conta, .login, .sair) {
   border-bottom: 3px solid #E64242;
 }
